@@ -1,6 +1,6 @@
 # Husky in The Wild
 
-Ongoing development of autonomous robot navigation in unknown outdoor environment.
+Ongoing development of exploration robot navigation in unknown outdoor environment.
 
 ## Installation
 The code is build on top of [ROS - Indigo](http://www.ros.org/) and simulate Husky robot using [Gazebo](gazebosim.org). The code has been tested only on Ubuntu 14.04. Please follow the following steps in order to install the package along with its dependences:
