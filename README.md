@@ -44,6 +44,9 @@ Script for starting everything at once, so no need for multiple terminals.
 - Using octomap: `python scripts/runall.py`
 - Or using SLAM LOAM: `python scripts/runall.py loam`
 
+Notice that gazebo server is very slow to start, so if you need to restart everything frequently, you can type 
+`roslaunch husky_gazebo husky_playpen.launch` to start the server, next close the gazebo client, then run the command above
+
 ### Run one by one:
 
 **Basic Husky:**
