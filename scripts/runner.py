@@ -14,6 +14,8 @@ class Runner:
         self.ndict = dict()
         self.pdict = dict()
         for i in range(len(commands)):
+            # add exec to all commands so that the new process will replace bash
+            commands[i] = "exec "+commands[i]
             self.ndict[i]=commands[i]
             self.pdict[i]=None
     def run(self):
@@ -72,7 +74,7 @@ class Runner:
             print "The {0}th command \n{1}\n is not running, you can start it by typing 'r {0}'".format(index,com)
             return
         print "killing the {0}th command \n{1}\n, whose PID is {2}".format(index,com,p.pid)
-        os.killpg(os.getpgid(p.pid), signal.SIGTERM)
+        os.kill(p.pid, signal.SIGTERM)
         self.pdict[index]=None
 
     def start(self,index):
