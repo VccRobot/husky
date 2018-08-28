@@ -29,20 +29,23 @@ catkin_make
 ```
 
 
-- The Gazebo version shipped with ROS-Indigo has known issue of being unable to download Gazebo models from Gazebo online repository. In order to avoid errors that might come up due to this issue, download and extract Gazebo models ([here [ 231MB] ](https://bitbucket.org/osrf/gazebo_models/downloads/)) and place them under `~/.gazebo/models/`
+- The Gazebo version shipped with ROS-Indigo has known issue of being unable to download Gazebo models from Gazebo online repository. In order to avoid errors that might come up due to this issue, download and extract Gazebo models ([here [231MB] ](https://bitbucket.org/osrf/gazebo_models/downloads/)) and place them under `~/.gazebo/models/`
 
 
 
 ## Running
-Before you should run 'source devel/setup.bash'in project root in order to setup the environment.
+Run `source devel/setup.bash` in project root in order to setup the environment variables.
 
 The code builds each useful functionality in a separate package for better modularity. In order to run the simulated Husky, you can run every components at once or step by step.
 
-Script for starting everything at once, so no need for multiple terminals.
-use octomap: 'python scripts/runall.py'
-or     loam: 'python scripts/runall.py loam'
+### Run all:
 
-Step by step:
+Script for starting everything at once, so no need for multiple terminals.
+- Using octomap: `python scripts/runall.py`
+- Or using SLAM LOAM: `python scripts/runall.py loam`
+
+### Run one by one:
+
 **Basic Husky:**
 
 ```
