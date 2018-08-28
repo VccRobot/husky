@@ -5,7 +5,7 @@ Ongoing development of exploration robot navigation in unknown outdoor environme
 ## Installation
 The code is build on top of [ROS - Indigo](http://www.ros.org/) and simulate Husky robot using [Gazebo](gazebosim.org). The code has been tested only on Ubuntu 14.04. Please follow the following steps in order to install the package along with its dependences:
 
-- Install ROS-Indigo full desktop ([guide](http://wiki.ros.org/indigo/Installation/Ubuntu])).
+- Install ROS-Indigo full desktop ([guide](http://wiki.ros.org/indigo/Installation/Ubuntu)).
 
 - Install Husky official package ([guide](http://wiki.ros.org/husky_gazebo/Tutorials/Simulating%20Husky))
 
