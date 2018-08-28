@@ -39,8 +39,8 @@ Before you should run 'source devel/setup.bash'in project root in order to setup
 The code builds each useful functionality in a separate package for better modularity. In order to run the simulated Husky, you can run every components at once or step by step.
 
 Script for starting everything at once, so no need for multiple terminals.
-use octomap: 'python runall.py'
-or     loam: 'python runall.py loam'
+use octomap: 'python scripts/runall.py'
+or     loam: 'python scripts/runall.py loam'
 
 Step by step:
 **Basic Husky:**
