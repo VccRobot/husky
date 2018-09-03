@@ -41,11 +41,15 @@ The code builds each useful functionality in a separate package for better modul
 ### Run all:
 
 Script for starting everything at once, so no need for multiple terminals.
-- Using octomap: `python scripts/runall.py`
-- Or using SLAM LOAM: `python scripts/runall.py loam`
+- Run in playpen: `python scripts/run_playpen.py`
+- Run in rough terrain: `python scripts/terrain.py `
+You can specify localization and mapping algorithm by appending their name behind the command, for example:
+- Use LOAM as SLAM algorithm: `python scripts/run_playpen.py loam`
+The default localization algorithm is extended kalman filter (EKF).
+And the default mapping algorithm is octomap.
 
-Notice that gazebo server is very slow to start, so if you need to restart everything frequently, you can type 
-`roslaunch husky_gazebo husky_playpen.launch` to start the server, next close the gazebo client, then run the command above
+Notice that gazebo server may be very slow to start, so if you need to restart everything frequently, you can type 
+`roslaunch husky_gazebo ${launch file}` to start the server, next close the gazebo client, then run the command above
 
 ### Run one by one:
 
@@ -54,7 +58,7 @@ Notice that gazebo server is very slow to start, so if you need to restart every
 ```
 roslaunch husky_gazebo husky_playpen.launch
 ```
-Other launch files can be used for different other outdoor environments e.g., `husky_wild.launch`.
+Other launch files can be used for different other outdoor environments e.g., `husky_wild.launch`, `husky_terrain.launch`.
 
  **Mapping:**
 

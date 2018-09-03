@@ -36,7 +36,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(arg world_name)"/> <!-- world_name is wrt GAZEBO_RESOURCE_PATH environment variable -->
     <arg name="paused" value="false"/>
-    <arg name="use_sim_time" value="true"/>
+    <arg name="use_sim_time" value="false"/>
     <arg name="gui" value="$(arg gui_enabled)"/>
     <arg name="headless" value="false"/>
     <arg name="debug" value="false"/>

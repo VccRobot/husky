@@ -3,3 +3,4 @@ devel/
 .catkin_workspace
 *backup*
 log
+.vscode
