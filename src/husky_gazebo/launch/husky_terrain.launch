@@ -14,7 +14,7 @@
     <arg name="kinect_enabled" value="$(arg kinect_enabled)"/>
     <arg name="gui_enabled" value="$(arg gui_enabled)"/>
   </include>
-  <param name="two_d_mode" value="false" />
+  <param name="ekf_localization/two_d_mode" value="false" />
   <node name="show_mesh" pkg="husky_gazebo" type="show_mesh" /> 
 
 </launch>
