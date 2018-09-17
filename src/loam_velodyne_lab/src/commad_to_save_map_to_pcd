@@ -1,3 +1,0 @@
-Run this command as after you launching LOAM 
->> cd /pcd/folder/path
->> rosrun pcl_ros pointcloud_to_pcd input:=/velodyne_cloud_registered
