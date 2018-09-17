@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="terrain_navigation" type="terrain_navigation" name="terrain_navigation"/>
+</launch>

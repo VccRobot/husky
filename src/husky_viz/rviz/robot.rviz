@@ -10,7 +10,6 @@ Panels:
         - /Sensing1/PointCloud21
         - /Navigation1
         - /Navigation1/Exploration1
-        - /Marker1
       Splitter Ratio: 0.494924
     Tree Height: 577
   - Class: rviz/Selection
@@ -31,7 +30,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2
+    SyncSource: ""
 Visualization Manager:
   Class: ""
   Displays:
@@ -209,15 +208,15 @@ Visualization Manager:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 6.45816
-            Min Value: -0.718499
+            Max Value: 10.1435
+            Min Value: 0.450008
             Value: true
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
           Color: 255; 255; 255
           Color Transformer: AxisColor
-          Decay Time: 0
+          Decay Time: 10000
           Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
@@ -360,13 +359,13 @@ Visualization Manager:
       Enabled: true
       Name: Navigation
     - Class: rviz/Marker
-      Enabled: true
+      Enabled: false
       Marker Topic: mesh_marker
       Name: mesh
       Namespaces:
-        basic_shapes: true
+        {}
       Queue Size: 100
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -396,15 +395,15 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.62908
-        Y: -0.0834703
-        Z: -0.848712
+        X: 8.88299
+        Y: 5.14046
+        Z: 1.21635
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.904799
+      Pitch: 0.0797996
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.01723
+      Yaw: 3.36222
     Saved: ~
 Window Geometry:
   Displays:

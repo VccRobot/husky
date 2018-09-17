@@ -36,5 +36,6 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     <arg name="ur5_enabled" value="$(arg ur5_enabled)"/>
     <arg name="kinect_enabled" value="$(arg kinect_enabled)"/>
   </include>
+  <node pkg="rosbag" name="record" type="record" args="-O /home/husky/husky/playpen.bag velodyne_points imu/data  husky_velocity_controller/odom"/>
 
 </launch>

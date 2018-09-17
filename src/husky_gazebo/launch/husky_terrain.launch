@@ -17,4 +17,6 @@
   <param name="ekf_localization/two_d_mode" value="false" />
   <node name="show_mesh" pkg="husky_gazebo" type="show_mesh" /> 
 
+  <node pkg="rosbag" name="record" type="record" args="-O /home/husky/husky/records/terrain.bag velodyne_points imu/data  husky_velocity_controller/odom"/>
+
 </launch>

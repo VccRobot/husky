@@ -1,6 +1,8 @@
 build/
 devel/
-.catkin_workspace
+records/
+.catkin*
 *backup*
 log
 .vscode
+*.pyc
