@@ -3,6 +3,9 @@
 Ongoing development of exploration robot navigation in unknown outdoor environment.
 
 ## Installation
+Easy install:
+sh install.sh
+
 The code is build on top of [ROS - Indigo](http://www.ros.org/) and simulate Husky robot using [Gazebo](gazebosim.org). The code has been tested only on Ubuntu 14.04. Please follow the following steps in order to install the package along with its dependences:
 
 - Install ROS-Indigo full desktop ([guide](http://wiki.ros.org/indigo/Installation/Ubuntu)).
@@ -41,10 +44,10 @@ The code builds each useful functionality in a separate package for better modul
 ### Run all:
 
 Script for starting everything at once, so no need for multiple terminals.
-- Run in playpen: `python scripts/run_playpen.py`
-- Run in rough terrain: `python scripts/terrain.py `
+- Run in playpen: `python husky_ws/scripts/run_playpen.py`
+- Run in rough terrain: `python husky_ws/scripts/terrain.py `
 You can specify localization and mapping algorithm by appending their name behind the command, for example:
-- Use LOAM as SLAM algorithm: `python scripts/run_playpen.py loam`
+- Use LOAM as SLAM algorithm: `python husky_ws/scripts/run_playpen.py loam`
 The default localization algorithm is extended kalman filter (EKF).
 And the default mapping algorithm is octomap.
 
