@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--Control Husky via keyboard-->
+  <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
+  launch-prefix="xterm -e"/>
+  
+</launch>

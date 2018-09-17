@@ -1,0 +1,29 @@
+... logging to /home/husky/.ros/log/1588cca0-b415-11e8-b9d2-f8cab85c44f3/roslaunch-husky-Precision-7710-23042.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/husky/husky/src/octomap_mapping/octomap_server/launch/octomap_mapping.launch
+[1mstarted roslaunch server http://husky-Precision-7710:42622/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /octomap_server/frame_id: odom
+ * /octomap_server/resolution: 0.05
+ * /octomap_server/sensor_model/max_range: 5.0
+ * /rosdistro: indigo
+ * /rosversion: 1.11.21
+
+NODES
+  /
+    octomap_server (octomap_server/octomap_server_node)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/husky/husky/src/octomap_mapping/octomap_server/launch/octomap_mapping.launch http://localhost:11311
+core service [/rosout] found
+[1mprocess[octomap_server-1]: started with pid [23144][0m
+[octomap_server-1] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

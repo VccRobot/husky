@@ -1,0 +1,4 @@
+[35m[1mScanning dependencies of target gazebo_ros_velodyne_laser[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/gazebo_ros_velodyne_laser.dir/src/GazeboRosVelodyneLaser.cpp.o[0m
+[100%] [32m[1mLinking CXX shared library /home/husky/husky/husky_ws/devel/.private/velodyne_gazebo_plugins/lib/libgazebo_ros_velodyne_laser.so[0m
+[100%] Built target gazebo_ros_velodyne_laser

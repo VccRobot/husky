@@ -1,0 +1,4 @@
+[35m[1mScanning dependencies of target show_mesh[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/show_mesh.dir/src/show_mesh.cpp.o[0m
+[100%] [32m[1mLinking CXX executable /home/husky/husky/husky_ws/devel/.private/husky_gazebo/lib/husky_gazebo/show_mesh[0m
+[100%] Built target show_mesh

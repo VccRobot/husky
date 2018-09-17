@@ -1,5 +1,5 @@
-sudo ls /usr/local/bin/protoc -al
-sudo ls /usr/local/include/google -al
-sudo ls /usr/local/lib/libproto* -al
-sudo ls /usr/local/lib/cmake/protobuf -al
+ls /usr/local/bin/protoc -al
+ls /usr/local/include/google -al
+ls /usr/local/lib/libproto* -al
+ls /usr/local/lib/cmake/protobuf -al
 

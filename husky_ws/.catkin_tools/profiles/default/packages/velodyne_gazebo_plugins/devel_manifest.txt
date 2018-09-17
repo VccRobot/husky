@@ -1,0 +1,5 @@
+velodyne_gazebo_plugins
+/home/husky/husky/husky_ws/devel/.private/velodyne_gazebo_plugins/share/velodyne_gazebo_plugins/cmake/velodyne_gazebo_pluginsConfig-version.cmake /home/husky/husky/husky_ws/devel/share/velodyne_gazebo_plugins/cmake/velodyne_gazebo_pluginsConfig-version.cmake
+/home/husky/husky/husky_ws/devel/.private/velodyne_gazebo_plugins/share/velodyne_gazebo_plugins/cmake/velodyne_gazebo_pluginsConfig.cmake /home/husky/husky/husky_ws/devel/share/velodyne_gazebo_plugins/cmake/velodyne_gazebo_pluginsConfig.cmake
+/home/husky/husky/husky_ws/devel/.private/velodyne_gazebo_plugins/lib/libgazebo_ros_velodyne_laser.so /home/husky/husky/husky_ws/devel/lib/libgazebo_ros_velodyne_laser.so
+/home/husky/husky/husky_ws/devel/.private/velodyne_gazebo_plugins/lib/pkgconfig/velodyne_gazebo_plugins.pc /home/husky/husky/husky_ws/devel/lib/pkgconfig/velodyne_gazebo_plugins.pc

@@ -1,0 +1,4 @@
+husky_viz
+/home/husky/husky/husky_ws/devel/.private/husky_viz/share/husky_viz/cmake/husky_vizConfig-version.cmake /home/husky/husky/husky_ws/devel/share/husky_viz/cmake/husky_vizConfig-version.cmake
+/home/husky/husky/husky_ws/devel/.private/husky_viz/share/husky_viz/cmake/husky_vizConfig.cmake /home/husky/husky/husky_ws/devel/share/husky_viz/cmake/husky_vizConfig.cmake
+/home/husky/husky/husky_ws/devel/.private/husky_viz/lib/pkgconfig/husky_viz.pc /home/husky/husky/husky_ws/devel/lib/pkgconfig/husky_viz.pc

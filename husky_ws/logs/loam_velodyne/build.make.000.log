@@ -1,0 +1,24 @@
+[35m[1mScanning dependencies of target loam[0m
+[ 14%] [32mBuilding CXX object src/lib/CMakeFiles/loam.dir/MultiScanRegistration.cpp.o[0m
+[ 14%] [32mBuilding CXX object src/lib/CMakeFiles/loam.dir/ScanRegistration.cpp.o[0m
+[ 21%] [32mBuilding CXX object src/lib/CMakeFiles/loam.dir/LaserOdometry.cpp.o[0m
+[ 28%] [32mBuilding CXX object src/lib/CMakeFiles/loam.dir/LaserMapping.cpp.o[0m
+[ 35%] [32mBuilding CXX object src/lib/CMakeFiles/loam.dir/TransformMaintenance.cpp.o[0m
+[ 42%] [32m[1mLinking CXX shared library /home/husky/husky/husky_ws/devel/.private/loam_velodyne/lib/libloam.so[0m
+[ 42%] Built target loam
+[35m[1mScanning dependencies of target transformMaintenance[0m
+[35m[1mScanning dependencies of target laserOdometry[0m
+[35m[1mScanning dependencies of target multiScanRegistration[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/transformMaintenance.dir/src/transform_maintenance_node.cpp.o[0m
+[ 57%] [32mBuilding CXX object CMakeFiles/laserOdometry.dir/src/laser_odometry_node.cpp.o[0m
+[ 64%] [32mBuilding CXX object CMakeFiles/multiScanRegistration.dir/src/multi_scan_registration_node.cpp.o[0m
+[35m[1mScanning dependencies of target laserMapping[0m
+[ 71%] [32mBuilding CXX object CMakeFiles/laserMapping.dir/src/laser_mapping_node.cpp.o[0m
+[ 78%] [32m[1mLinking CXX executable /home/husky/husky/husky_ws/devel/.private/loam_velodyne/lib/loam_velodyne/transformMaintenance[0m
+[ 78%] Built target transformMaintenance
+[ 85%] [32m[1mLinking CXX executable /home/husky/husky/husky_ws/devel/.private/loam_velodyne/lib/loam_velodyne/laserOdometry[0m
+[ 85%] Built target laserOdometry
+[ 92%] [32m[1mLinking CXX executable /home/husky/husky/husky_ws/devel/.private/loam_velodyne/lib/loam_velodyne/multiScanRegistration[0m
+[100%] [32m[1mLinking CXX executable /home/husky/husky/husky_ws/devel/.private/loam_velodyne/lib/loam_velodyne/laserMapping[0m
+[100%] Built target multiScanRegistration
+[100%] Built target laserMapping

@@ -1,0 +1,5 @@
+... logging to /home/husky/.ros/log/1588cca0-b415-11e8-b9d2-f8cab85c44f3/roslaunch-husky-Precision-7710-30066.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/husky/husky/husky_ws/src/husky_gazebo/launch/husky_terrain.launch
