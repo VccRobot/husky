@@ -7,7 +7,7 @@ protobuf
 records
 /.catkin*
 backup*
-/log
-/*.log
+log
+*.log
 /.vscode
 *.pyc

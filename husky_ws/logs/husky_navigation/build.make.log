@@ -1,4 +1,0 @@
-[35m[1mScanning dependencies of target terrain_navigation[0m
-[ 50%] [32mBuilding CXX object CMakeFiles/terrain_navigation.dir/src/terrain_navigation.cpp.o[0m
-[100%] [32m[1mLinking CXX executable /home/husky/husky/husky_ws/devel/.private/husky_navigation/lib/husky_navigation/terrain_navigation[0m
-[100%] Built target terrain_navigation

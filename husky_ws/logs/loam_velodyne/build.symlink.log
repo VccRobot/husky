@@ -1,8 +1,0 @@
-Symlinking /home/husky/husky/husky_ws/devel/share/loam_velodyne/cmake/loam_velodyneConfig-version.cmake
-Symlinking /home/husky/husky/husky_ws/devel/share/loam_velodyne/cmake/loam_velodyneConfig.cmake
-Symlinking /home/husky/husky/husky_ws/devel/lib/libloam.so
-Symlinking /home/husky/husky/husky_ws/devel/lib/pkgconfig/loam_velodyne.pc
-Symlinking /home/husky/husky/husky_ws/devel/lib/loam_velodyne/laserMapping
-Symlinking /home/husky/husky/husky_ws/devel/lib/loam_velodyne/transformMaintenance
-Symlinking /home/husky/husky/husky_ws/devel/lib/loam_velodyne/laserOdometry
-Symlinking /home/husky/husky/husky_ws/devel/lib/loam_velodyne/multiScanRegistration

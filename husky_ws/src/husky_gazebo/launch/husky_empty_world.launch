@@ -25,7 +25,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 -->
 <launch>
 
-  <arg name="world_name" default="empty.world"/><!--installed when you install
+  <arg name="world_name" default="empty"/><!--installed when you install
   husky package wiki.ros.org/Robots/Husky
   activate the commented lines in env_hooks to append to GAZEBO_RESOURCE_PATH-->
   <arg name="laser_enabled" default="$(optenv HUSKY_LASER_ENABLED false)"/>
@@ -34,7 +34,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <arg name="gui_enabled" default="true"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-      <arg name="world_name" value="$(find husky_gazebo)/worlds/$(arg world_name).world"/> <!-- world_name is wrt GAZEBO_RESOURCE_PATH environment variable -->
+    <arg name="world_name" value="$(find husky_gazebo)/worlds/$(arg world_name).world"/> <!-- world_name is wrt GAZEBO_RESOURCE_PATH environment variable -->
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="false"/>
     <arg name="gui" value="$(arg gui_enabled)"/>
@@ -48,7 +48,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     <arg name="ur5_enabled" value="$(arg ur5_enabled)"/>
     <arg name="kinect_enabled" value="$(arg kinect_enabled)"/>
   </include>
-  <node pkg="rosbag" name="record" type="record" args="-O $(env VCCHUSKY_DIR)/records/$(arg world_name).bag velodyne_points imu/data  husky_velocity_controller/odom"/>
+  <node pkg="rosbag" name="record" type="record" args="-O $(env VCCHUSKY_DIR)/records/$(arg world_name).bag /velodyne_points /imu/data  /husky_velocity_controller/odom"/>
    
 
 </launch>
