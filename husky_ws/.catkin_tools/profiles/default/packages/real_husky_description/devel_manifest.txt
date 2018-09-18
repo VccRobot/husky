@@ -1,0 +1,5 @@
+real_husky_description
+/home/husky/husky/husky_ws/devel/.private/real_husky_description/share/real_husky_description/cmake/real_husky_descriptionConfig-version.cmake /home/husky/husky/husky_ws/devel/share/real_husky_description/cmake/real_husky_descriptionConfig-version.cmake
+/home/husky/husky/husky_ws/devel/.private/real_husky_description/share/real_husky_description/cmake/real_husky_descriptionConfig.cmake /home/husky/husky/husky_ws/devel/share/real_husky_description/cmake/real_husky_descriptionConfig.cmake
+/home/husky/husky/husky_ws/devel/.private/real_husky_description/etc/catkin/profile.d/50.real_husky_description.sh /home/husky/husky/husky_ws/devel/etc/catkin/profile.d/50.real_husky_description.sh
+/home/husky/husky/husky_ws/devel/.private/real_husky_description/lib/pkgconfig/real_husky_description.pc /home/husky/husky/husky_ws/devel/lib/pkgconfig/real_husky_description.pc
