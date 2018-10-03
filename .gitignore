@@ -11,3 +11,4 @@ log
 *.log
 /.vscode
 *.pyc
+site

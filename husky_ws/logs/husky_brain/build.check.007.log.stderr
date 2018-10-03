@@ -1,0 +1,8 @@
+[31m[1mCMake Error[0m at /opt/ros/indigo/share/genmsg/cmake/genmsg-extras.cmake:263 (message):
+  Messages depends on unknown pkg: geometry_msgs (Missing
+  'find_package(geometry_msgs)'?)
+[36mCall Stack (most recent call first):[0m
+  CMakeLists.txt:75 (generate_messages)
+
+
+make: *** [cmake_check_build_system] Error 1

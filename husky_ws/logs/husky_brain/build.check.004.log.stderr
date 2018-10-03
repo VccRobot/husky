@@ -1,0 +1,13 @@
+[31m[1mCMake Error[0m at /media/husky/Disk/workshop/husky/husky_ws/build/husky_brain/cmake/husky_brain-genmsg.cmake:3 (message):
+  Could not find messages which
+  '/home/husky/husky/husky_ws/src/husky_brain/msg/adjedge.msg' depends on.
+  Did you forget to specify generate_messages(DEPENDENCIES ...)?
+
+  Cannot locate message [int] in package [husky_brain] with paths
+  [['/home/husky/husky/husky_ws/src/husky_brain/msg']]
+[36mCall Stack (most recent call first):[0m
+  /opt/ros/indigo/share/genmsg/cmake/genmsg-extras.cmake:307 (include)
+  CMakeLists.txt:75 (generate_messages)
+
+
+make: *** [cmake_check_build_system] Error 1

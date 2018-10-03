@@ -1,0 +1,44 @@
+/opt/ros/indigo/share/genmsg/cmake/pkg-genmsg.cmake.em:56: error: <class 'genmsg.base.InvalidMsgSpec'>: /home/husky/husky/husky_ws/src/husky_brain/msg/adjedge.msg: double is not a legal constant type
+Traceback (most recent call last):
+  File "/usr/bin/empy", line 3276, in <module>
+    if __name__ == '__main__': main()
+  File "/usr/bin/empy", line 3274, in main
+    invoke(sys.argv[1:])
+  File "/usr/bin/empy", line 3257, in invoke
+    interpreter.wrap(interpreter.file, (file, name))
+  File "/usr/bin/empy", line 2262, in wrap
+    self.fail(e)
+  File "/usr/bin/empy", line 2253, in wrap
+    callable(*args)
+  File "/usr/bin/empy", line 2326, in file
+    self.safe(scanner, done, locals)
+  File "/usr/bin/empy", line 2368, in safe
+    self.parse(scanner, locals)
+  File "/usr/bin/empy", line 2388, in parse
+    token.run(self, locals)
+  File "/usr/bin/empy", line 1403, in run
+    interpreter.execute(self.code, locals)
+  File "/usr/bin/empy", line 2565, in execute
+    exec(statements, self.globals)
+  File "<string>", line 38, in <module>
+  File "/opt/ros/indigo/lib/python2.7/dist-packages/genmsg/deps.py", line 45, in find_msg_dependencies_with_type
+    spec = genmsg.msg_loader.load_msg_from_file(msg_context, msg_file, full_type_name)
+  File "/opt/ros/indigo/lib/python2.7/dist-packages/genmsg/msg_loader.py", line 284, in load_msg_from_file
+    raise InvalidMsgSpec('%s: %s'%(file_path, e))
+genmsg.base.InvalidMsgSpec: /home/husky/husky/husky_ws/src/husky_brain/msg/adjedge.msg: double is not a legal constant type
+[31m[1mCMake Error[0m at /opt/ros/indigo/share/catkin/cmake/safe_execute_process.cmake:11 (message):
+
+  execute_process(/media/husky/Disk/workshop/husky/husky_ws/build/husky_brain/catkin_generated/env_cached.sh
+  "/usr/bin/python" "/usr/bin/empy" "--raw-errors" "-F"
+  "/media/husky/Disk/workshop/husky/husky_ws/build/husky_brain/cmake/husky_brain-genmsg-context.py"
+  "-o"
+  "/media/husky/Disk/workshop/husky/husky_ws/build/husky_brain/cmake/husky_brain-genmsg.cmake"
+  "/opt/ros/indigo/share/genmsg/cmake/pkg-genmsg.cmake.em") returned error
+  code 1
+[36mCall Stack (most recent call first):[0m
+  /opt/ros/indigo/share/catkin/cmake/em_expand.cmake:25 (safe_execute_process)
+  /opt/ros/indigo/share/genmsg/cmake/genmsg-extras.cmake:303 (em_expand)
+  CMakeLists.txt:75 (generate_messages)
+
+
+make: *** [cmake_check_build_system] Error 1
