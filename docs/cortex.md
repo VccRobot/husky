@@ -1,6 +1,6 @@
 # Husky Cortex Module
 This module provides high level perception and path planning for the robot.
-## husky_brain ROS Package Documentation
+## husky_cortex ROS Package Documentation
 ### Nodes and Topics
 `cortexMap` subscribes `location`, publishes `meshmap` and `reebgraph`
 `cortexPlanner` subscribes `location`, `meshmap` and `reebgraph`, publishes `next_waypoints`

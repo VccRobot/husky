@@ -5,7 +5,7 @@ devel_isolated/
 install_isolated/
 protobuf
 records
-/.catkin*
+.catkin*
 backup*
 log
 *.log

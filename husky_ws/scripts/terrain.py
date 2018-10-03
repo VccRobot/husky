@@ -11,7 +11,7 @@ if len(sys.argv)>1 and sys.argv[1]=="loam":
 else:
     commands.append("roslaunch octomap_server octomap_mapping.launch > log/octomapping.log")
     commands.append("roslaunch husky_viz view_robot.launch > log/view_robot.log")
-    commands.append("roslaunch husky_navigation move_base_mapless_demo.launch")
+    #commands.append("roslaunch husky_navigation move_base_mapless_demo.launch")
 commands.append("roslaunch husky_control teleop_keyboard.launch > log/teleop_keyboard.log")
 
 r = Runner(commands)

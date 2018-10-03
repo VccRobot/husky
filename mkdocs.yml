@@ -3,7 +3,7 @@ theme:
     name: 'material'
 pages:
     - Home: index.md
-    - Intelligence: brain.md
+    - Intelligence: cortex.md
     - Navigation: navigation.md
     - Control: control.md
     - PointCloudProcessing: pcprocessing.md
