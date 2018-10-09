@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+    <param name="meshPath" value="$(find husky_cortex)/data/planehole.obj" />
+    <param name="initLocation" value="-241. 5.0 -193." />
+    <param name="velocity" value="20." />
+    <param name="coverRange" value="50." />
+    <node name="cortexWorld" pkg="husky_cortex" type="CortexWorld" output="screen"/> 
+
+</launch>

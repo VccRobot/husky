@@ -1,7 +1,8 @@
 # Husky in The Wild
 
 Ongoing development of exploration robot navigation in unknown outdoor environment.
-
+## Documentation
+[Project Documentation](http://vccrobot.github.io/husky)
 ## Installation
 Easy install:
 sh install.sh

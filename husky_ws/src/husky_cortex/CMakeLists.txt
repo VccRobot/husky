@@ -2,7 +2,30 @@ cmake_minimum_required(VERSION 2.8.3)
 project(husky_cortex)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+ add_compile_options(-std=c++11)
+add_definitions(-DCORTEX_DATA_PATH="${PROJECT_SOURCE_DIR}/data")
+
+## LIBIGL Related
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+set(CMAKE_BUILD_TYPE Release)
+option(LIBIGL_USE_STATIC_LIBRARY "Use libigl as static library" OFF)
+option(LIBIGL_WITH_ANTTWEAKBAR       "Use AntTweakBar"    OFF)
+option(LIBIGL_WITH_CGAL              "Use CGAL"           OFF)
+option(LIBIGL_WITH_COMISO            "Use CoMiso"         OFF)
+option(LIBIGL_WITH_CORK              "Use Cork"           OFF)
+option(LIBIGL_WITH_EMBREE            "Use Embree"         OFF)
+option(LIBIGL_WITH_LIM               "Use LIM"            OFF)
+option(LIBIGL_WITH_MATLAB            "Use Matlab"         OFF)
+option(LIBIGL_WITH_MOSEK             "Use MOSEK"          OFF)
+option(LIBIGL_WITH_OPENGL            "Use OpenGL"         ON)
+option(LIBIGL_WITH_OPENGL_GLFW       "Use GLFW"           ON)
+option(LIBIGL_WITH_OPENGL_GLFW_IMGUI "Use ImGui"          OFF)
+option(LIBIGL_WITH_PNG               "Use PNG"            OFF)
+option(LIBIGL_WITH_PYTHON            "Use Python"         OFF)
+option(LIBIGL_WITH_TETGEN            "Use Tetgen"         OFF)
+option(LIBIGL_WITH_TRIANGLE          "Use Triangle"       OFF)
+option(LIBIGL_WITH_VIEWER            "Use OpenGL viewer"  ON)
+option(LIBIGL_WITH_XML               "Use XML"            OFF)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -18,7 +41,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
-
+find_package(LIBIGL REQUIRED QUIET)
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
@@ -123,7 +146,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -141,6 +164,10 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/husky_cortex_node.cpp)
+#add_executable(CortexMap src/CortexMap.cpp)
+#add_executable(CortexPlanner src/CortexPlanner.cpp)
+add_executable(CortexWorld src/CortexWorld.cpp src/Viewer.cpp src/CortexTypes.cpp src/Simulation.cpp)
+#add_executable(Viewer src/CortexViewer.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -156,6 +183,10 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+#target_link_libraries(CortexMap ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
+#target_link_libraries(CortexPlanner ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
+target_link_libraries(CortexWorld ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
+#target_link_libraries(CortexViewer ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
 
 #############
 ## Install ##

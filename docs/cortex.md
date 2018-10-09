@@ -21,12 +21,14 @@ This module provides high level perception and path planning for the robot.
 * **`meshmap`** which contains:
     * `V` a V by 1 vector.
     * `E` a E by 1 vector.
-    * `reebi` a  V by 1 vector, which encodes which reebgraph node a vertex belongs.
-    * `vtype` an E by 1 vector, which encodes the status of the vertices.
+    * `reebi` a V by 1 vector, which encodes which reebgraph node a vertex belongs.
+    * `vstat` a V by 1 vector, which encodes the status of the vertices.
         * `0` means the vertex is undiscovered.
         * `1` means the vertex is discovered.
-        * `2` means the vertex is a boundary point.
-        * `3` means the vertex is a criticle point.
+    * `vtype` a V by 1 vector, which encodes the type of the vertices.
+        * `0` means the vertex is an ordinary point.
+        * `1` means the vertex is a boundary point.
+        * `2` means the vertex is a criticle point.
 * **`reebgraph`**
     * 'graph' an adjacency list which represents the graph. 
     * 'vtype' a  V by 1 vector, which encodes type of the vertices.
