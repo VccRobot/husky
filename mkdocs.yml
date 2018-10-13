@@ -11,7 +11,7 @@ extra:
           link: 'https://github/vcchusky/'
 pages:
     - Home: index.md
-    - 小任务: exam.md
+    - 小任务: warmup.md
     - Intelligence: cortex.md
     - Navigation: navigation.md
     - Control: control.md
