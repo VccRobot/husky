@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-    <param name="goalx" value="2."/>
-    <param name="goaly" value="-5."/>
-    <node pkg="husky_navigation" type="terrain_navigation" name="terrain_navigation"/>
-</launch>
