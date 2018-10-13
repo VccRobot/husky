@@ -13,7 +13,7 @@
         <meta name="description" content="Ongoing development of exploration robot navigation in unknown outdoor environment.">
       
       
-        <link rel="canonical" href="https://vccrobot.github.io/husky/navigation/">
+        <link rel="canonical" href="https://vccrobot.github.io/husky/warmup/">
       
       
       
@@ -40,7 +40,7 @@
     
     
       
-        <title>Navigation - vcchusky</title>
+        <title>小任务 - vcchusky</title>
       
     
     
@@ -94,7 +94,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#to-do" tabindex="1" class="md-skip">
+      <a href="../#_1" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -120,7 +120,7 @@
                 vcchusky
               </span>
               <span class="md-header-nav__topic">
-                Navigation
+                小任务
               </span>
             
           
@@ -247,11 +247,76 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../warmup/" title="小任务" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        小任务
+      </label>
+    
+    <a href="./" title="小任务" class="md-nav__link md-nav__link--active">
       小任务
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#job" title="JOB" class="md-nav__link">
+    JOB
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="参考文献" class="md-nav__link">
+    参考文献
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="其他参考文献" class="md-nav__link">
+    其他参考文献
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="附录" class="md-nav__link">
+    附录
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -271,20 +336,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="Navigation" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../navigation/" title="Navigation" class="md-nav__link">
       Navigation
     </a>
-    
   </li>
 
     
@@ -329,6 +385,49 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#job" title="JOB" class="md-nav__link">
+    JOB
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="参考文献" class="md-nav__link">
+    参考文献
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="其他参考文献" class="md-nav__link">
+    其他参考文献
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="附录" class="md-nav__link">
+    附录
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -339,10 +438,41 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/VccRobot/husky/edit/master/docs/navigation.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/VccRobot/husky/edit/master/docs/warmup.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="to-do">TO DO</h1>
+                <h1 id="_1">小任务</h1>
+<h2 id="job">JOB</h2>
+<ul>
+<li><em>部署</em>：依照部署指南在自己机器上部署<a href="https://github.com/VccRobot/husky/warmup">Husky项目</a>，</li>
+<li><em>机器人移动控制</em> 在planpen地图(2d)中实现给定点的导航，例如：机器人初始位置为(0,0,0)，给定目标位置为(-1,-5,0)，用C++编写ROS程序控制机器人到达指定地点（忽略朝向）。附录有一些图片展示目标效果。
+开发环境：Ubuntu 14.04, ROS版本：indigo</li>
+</ul>
+<p>提示：下载好项目代码之后，先看一下ROS入门书前几章，理解一下项目结构，试着用python husky_ws/scripts/XXXX.py 或者roslaunch运行项目程序。
+之后可以<em>查看ROS tf教程，仿照里面乌龟机器人的控制方法控制Husky机器人。</em>
+如果直接这么做比较困难，可以试着自己编写运行<em>turtlesim</em>的例子</p>
+<p>注：本项目诸多过程需要翻墙，请自行使用<a href="https://echohn.github.io/2016/05/29/to-build-the-fullstack-tools-for-over-the-wall/">proxychains+shadowsocks</a>等工具翻墙。</p>
+<hr />
+<h2 id="_2">参考文献</h2>
+<p><a href="https://github.com/VccRobot/husky/warmup">项目代码</a></p>
+<p><a href="http://lsi.vc.ehu.es/pablogn/investig/ROS/A Gentle Introduction to ROS.pdf">ROS入门书</a></p>
+<p><a href="http://wiki.ros.org/turtlesim/Tutorials">ROS入门实战例子turtlesim教程</a></p>
+<p><a href="https://catkin-tools.readthedocs.io/">ROS编译工具catkin 文档</a></p>
+<p><a href="http://wiki.ros.org/tf/Tutorials">ROS tf教程</a></p>
+<p><a href="https://cmake.org/cmake-tutorial/">CMake基本例子</a> CMake是C++项目部署程序，而Catkin是基于CMake的，所以有可能需要了解CMake</p>
+<p><a href="https://www.edx.org/course/autonomous-mobile-robots">ETH自主机器人课程</a></p>
+<p>注：catkin_make和catkin build都可以编译代码，catkin_make是旧版的编译命令。</p>
+<hr />
+<h3 id="_3">其他参考文献</h3>
+<p><a href="http://www.roboticsproceedings.org/rss10/p07.pdf">LOAM SLAM算法论文</a></p>
+<p><a href="https://google-cartographer.readthedocs.io/en/latest/">Cartographer 系统文档</a></p>
+<p><a href="https://google-cartographer-ros.readthedocs.io/en/latest/">Cartographer ROS接口文档</a></p>
+<h2 id="_4">附录</h2>
+<p>自动导航到目标地点。
+<img alt="" src="../imgs/w1.png" />
+<img alt="" src="../imgs/w2.png" />
+<img alt="" src="../imgs/w3.png" />
+<img alt="" src="../imgs/w4.png" /></p>
                 
                   
                 
@@ -363,7 +493,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../cortex/" title="Intelligence" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -372,19 +502,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Intelligence
+                Home
               </span>
             </div>
           </a>
         
         
-          <a href="../control/" title="Control" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../cortex/" title="Intelligence" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Control
+                Intelligence
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
