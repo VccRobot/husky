@@ -14,6 +14,8 @@
 
 namespace husky_cortex{
 
+class Planner;
+
 double clamp(double x, double upper, double lower);
 class CortexWorld{
     public:
@@ -25,6 +27,14 @@ class CortexWorld{
     //ros::Subscriber subscriber_;
 
     husky_cortex::CortexMeshmap meshmap_;
+    
+    // planner variables
+    // planMode_ has value 0 or 1, the other two hs value -1 or 1
+    int planMode_, tanDir_, normDir_;
+    Eigen::Vector3d tanDelta_,normDelta_;
+    double bndDThreshold_;
+
+    double lastTanH_, normDThreshold_;
 
     CortexWorld();
     CortexWorld(CortexMeshmap meshmap);
@@ -43,4 +53,5 @@ class CortexWorld{
     virtual Eigen::Vector3d get_next_waypoint();
     
 };
+
 }

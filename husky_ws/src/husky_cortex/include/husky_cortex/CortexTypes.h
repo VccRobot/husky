@@ -35,6 +35,7 @@ class CortexMeshmap: public CortexTypes{
     double velocity_, coverRange_;
 
     std::vector<std::vector<int> >bdloops_;
+    std::vector< Eigen::Vector3d > vbdP1,vbdP2;//start and end points of boundaries
 
     Eigen::MatrixXd V_uv_;
 
@@ -42,6 +43,8 @@ class CortexMeshmap: public CortexTypes{
     CortexMeshmap(){}
     CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange);
     // update meshmap and reebgraph according to current location
+    double boundaryDist(Eigen::Vector3d p);
+    double getH();
     void updateMesh();
 };
 

@@ -1,8 +1,17 @@
 site_name: vcchusky
+site_url: 'https://vccrobot.github.io/husky/'
+repo_name: 'VccRobot/husky'
+repo_url: 'https://github.com/VccRobot/husky'
+site_description: 'Ongoing development of exploration robot navigation in unknown outdoor environment.'
 theme:
     name: 'material'
+extra:
+    social:
+        - type: 'github'
+          link: 'https://github/vcchusky/'
 pages:
     - Home: index.md
+    - 小任务: exam.md
     - Intelligence: cortex.md
     - Navigation: navigation.md
     - Control: control.md

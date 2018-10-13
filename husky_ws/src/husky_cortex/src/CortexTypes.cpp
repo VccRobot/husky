@@ -4,6 +4,7 @@
 #include <igl/boundary_loop.h>
 #include <igl/map_vertices_to_circle.h>
 #include <igl/harmonic.h>
+#include <igl/project_to_line_segment.h>
 
 #include <iostream>
 using namespace husky_cortex;
@@ -20,7 +21,7 @@ CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, dou
     reebi_= Eigen::VectorXi::Constant(vn,0);
     h_= Eigen::VectorXd::Constant(vn,.0);
 
-    
+    // get boundaries    
     igl::boundary_loop(F_, bdloops_);
     for(int i=0;i<bdloops_.size();i++){
         for(int j=0;j<bdloops_[i].size();j++){
@@ -28,6 +29,17 @@ CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, dou
         }
         std::cout<<"Loop "<<i<<"s length: "<<bdloops_[i].size()<<std::endl;
     }
+    // squeeze the boundaries to start and end point list 
+    for(int i=0;i<bdloops_.size();i++){
+        for(int j=0;j<bdloops_[i].size();j++){
+            Eigen::Vector3d pnt1(V_.row(bdloops_[i][j]));
+            vbdP1.push_back(pnt1);
+            int nextIndex=(j+1)%bdloops_[i].size();
+            Eigen::Vector3d pnt2(V_.row(bdloops_[i][nextIndex]));
+            vbdP2.push_back(pnt2);
+        }
+    }
+
 
     // compute UV coordinates(parametrization)
       // Map the boundary to a circle, preserving edge proportions
@@ -72,4 +84,30 @@ void CortexMeshmap::updateMesh(){
             }
         }
     }
+}
+double getP2SegD(Eigen::Vector3d p1, Eigen::Vector3d p2, Eigen::Vector3d p){
+    //typedef Eigen::Hyperplane<float,3> Line2;
+    //Eigen::Vector3d a(8,2), b(9,5), c(6,6), d(5,9);
+
+    //Line2 ac = Line2::Through(a,c), bd=Line2::Through(b,d);
+
+    //ac.intersection(bd);
+}
+double CortexMeshmap::boundaryDist(Eigen::Vector3d p){
+    double mdist=1000000000000.0;
+//    Eigen::MatrixXd P = 
+//    igl::project_to_line_segment(P,S,D,t,sqrD);
+
+    for(int i=0;i<bdloops_.size();i++){
+        for(int j=0;j<bdloops_[i].size();j++){
+            double dist;
+            int p1i=bdloops_[i][j], p2i=bdloops_[i][(j+1)%bdloops_[i].size()];
+            dist = getP2SegD(V_.row(p1i),V_.row(p2i), p);
+            mdist = std::min(dist,mdist);
+        }
+    }
+    return mdist;
+}
+double CortexMeshmap::getH(){
+    return location_(1,0);
 }

@@ -12,6 +12,7 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 
+double goalx, goaly;
 
 class TerrainNavigator;
 class OdomTopicHandle;
@@ -78,16 +79,14 @@ public:
       z = last_odom_msg_->pose.pose.position.z;
 
       double gx,gy,dx,dy;
-      gx = 10.0;
-      gy = 2.0;
-      dx = gx - x;
-      dy = gy - y;
+      dx = goalx - x;
+      dy = goaly - y;
       last_odom_msg_->twist;
       ROS_INFO("odometry pose: (%lf, %lf, %lf)",x,y,z);
       geometry_msgs::Twist vel_msg;
       double angle = atan2(dy,dx);
       double dist = sqrt(pow(dx, 2) + pow(dy, 2));
-      vel_msg.angular.z = clamp(0.1 * angle,.1,-.1);
+      vel_msg.angular.z = clamp(0.2 * angle, .5,-.5);
       vel_msg.linear.x = clamp( 0.2 * dist,.2,-.2);
 
       cmd_pub_.publish(vel_msg);
@@ -117,6 +116,8 @@ int main( int argc, char** argv )
 {
     //Initializes ROS, and sets up a node
     ros::init(argc, argv, "terrain_navigation");
+    ros::param::get("goalx", goalx);
+    ros::param::get("goaly", goaly);
 
     srand(time(0));
     TerrainNavigator tnav;
