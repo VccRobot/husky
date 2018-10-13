@@ -39,7 +39,7 @@
 
 ## 附录
 自动导航到目标地点。
+![](imgs/w0.png)
 ![](imgs/w1.png)
 ![](imgs/w2.png)
 ![](imgs/w3.png)
-![](imgs/w4.png)
