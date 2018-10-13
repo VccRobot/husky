@@ -36,6 +36,8 @@ class CortexMeshmap: public CortexTypes{
 
     std::vector<std::vector<int> >bdloops_;
 
+    Eigen::MatrixXd V_uv_;
+
     public:
     CortexMeshmap(){}
     CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange);

@@ -65,14 +65,20 @@ void rosRunLoop(){
 void cortexWorldInit(){
     //nh.getParam()
 
+    int colorScheme;
     double x,y,z;
-    std::string meshPath,initLocation;
+    std::string meshPath,initLocation, baseTexture;
+    std::vector<std::string> textures;
     
     ros::param::get("meshPath",meshPath);
     ros::param::get("initLocation", initLocation);
     std::stringstream(initLocation) >> x >> y >> z;
     ros::param::get("velocity", velocity);
     ros::param::get("coverRange",coverRange);
+    ros::param::get("baseTexture", baseTexture);
+    textures.push_back(baseTexture);
+    ros::param::get("colorScheme", colorScheme);
+
 
     ROS_INFO("meshPath: %s\n initLocation:%s\n velocity:%lf\n coverRange:%lf\n\n\n",
         meshPath.c_str(), initLocation.c_str(), velocity, coverRange);
@@ -81,7 +87,7 @@ void cortexWorldInit(){
     next_waypoint = Eigen::Vector3d(x,y,z);
     meshmap = CortexMeshmap(meshPath, Eigen::Vector3d(x,y,z), velocity, coverRange);
     cortexWorld = CortexWorld(meshmap);
-    cortexWorldViewer = Viewer(&cortexWorld);
+    cortexWorldViewer = Viewer(&cortexWorld, textures, colorScheme);
 
 
 }

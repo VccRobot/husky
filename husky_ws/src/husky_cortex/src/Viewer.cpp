@@ -1,10 +1,14 @@
 #include <husky_cortex/Viewer.h>
 #include <husky_cortex/CortexWorld.h>
 #include <iostream>
+
+#include <igl/png/readPNG.h>
+
 using namespace husky_cortex;
 //bool husky_cortex::Viewer::pre_draw(){
 CortexWorld *cworld;
 Eigen::MatrixXd bdP1(3,3),bdP2(3,3);
+int viewerColorScheme=0;
 bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     using namespace Eigen;
     using namespace std;
@@ -17,7 +21,8 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer){
 
     // set mesh color
     MatrixXd C;
-    igl::jet(meshmap.vstat_,true,C);
+    igl::ColorMapType color = static_cast<igl::ColorMapType>(viewerColorScheme);
+    igl::colormap(color,meshmap.vstat_,true,C);
     viewer.data().set_colors(C);
 
     // add boundary edges visualization
@@ -42,10 +47,12 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     return false;
 }
  
-husky_cortex::Viewer::Viewer(CortexWorld *cortexWorld):cortexWorld_(cortexWorld){
+husky_cortex::Viewer::Viewer(CortexWorld *cortexWorld, std::vector<std::string> textureFiles, int colorScheme)
+:cortexWorld_(cortexWorld), textureFiles_(textureFiles), colorScheme_(colorScheme){
     cworld = cortexWorld;
+    viewer_.data().clear();
     viewer_.data().set_mesh(cortexWorld_->meshmap_.V_, cortexWorld_->meshmap_.F_);
-    //viewer_.data().show_lines = false;
+    viewer_.data().show_lines = false;
     //viewer_.data().set_colors(C);
     //viewer_.core.trackball_angle = Eigen::Quaternionf(sqrt(2.0),0,sqrt(2.0),0);
     //viewer_.core.trackball_angle.normalize();
@@ -53,4 +60,15 @@ husky_cortex::Viewer::Viewer(CortexWorld *cortexWorld):cortexWorld_(cortexWorld)
     //viewer_.callback_key_down = &key_down;
     viewer_.core.is_animating = true;
     viewer_.core.animation_max_fps = 30.;
+    
+    //color
+    viewerColorScheme = colorScheme_;
+    
+    //load texture
+    viewer_.data().set_uv(cortexWorld->meshmap_.V_uv_);
+    viewer_.data().show_texture = true;
+    Eigen::Matrix<unsigned char,Eigen::Dynamic,Eigen::Dynamic> R,G,B,A;
+    igl::png::readPNG(textureFiles_[0],R,G,B,A);
+    viewer_.data().set_texture(R,G,B);
+
 }

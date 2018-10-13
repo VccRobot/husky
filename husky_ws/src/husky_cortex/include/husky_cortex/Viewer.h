@@ -6,6 +6,8 @@ class Viewer{
     public:
     igl::opengl::glfw::Viewer viewer_;
     husky_cortex::CortexWorld *cortexWorld_;
+    std::vector<std::string> textureFiles_;
+    int colorScheme_;
 
     public:
     void launch(){
@@ -14,6 +16,6 @@ class Viewer{
     //bool pre_draw(igl::opengl::glfw::Viewer &viewer);
 
     Viewer():cortexWorld_(NULL){}
-    Viewer(CortexWorld *cortexWorld);
+    Viewer(CortexWorld *cortexWorld, std::vector<std::string> textureFiles, int colorScheme);
 };
 }

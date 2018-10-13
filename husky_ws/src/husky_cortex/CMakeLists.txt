@@ -5,6 +5,21 @@ project(husky_cortex)
  add_compile_options(-std=c++11)
 add_definitions(-DCORTEX_DATA_PATH="${PROJECT_SOURCE_DIR}/data")
 
+
+## Find catkin macros and libraries
+## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
+## is used, also find other catkin packages
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  roslaunch
+  std_msgs
+  geometry_msgs
+  message_generation
+)
+
+## System dependencies are found with CMake's conventions
+# find_package(Boost REQUIRED COMPONENTS system)
+
 ## LIBIGL Related
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 set(CMAKE_BUILD_TYPE Release)
@@ -20,26 +35,12 @@ option(LIBIGL_WITH_MOSEK             "Use MOSEK"          OFF)
 option(LIBIGL_WITH_OPENGL            "Use OpenGL"         ON)
 option(LIBIGL_WITH_OPENGL_GLFW       "Use GLFW"           ON)
 option(LIBIGL_WITH_OPENGL_GLFW_IMGUI "Use ImGui"          OFF)
-option(LIBIGL_WITH_PNG               "Use PNG"            OFF)
+option(LIBIGL_WITH_PNG               "Use PNG"            ON)
 option(LIBIGL_WITH_PYTHON            "Use Python"         OFF)
 option(LIBIGL_WITH_TETGEN            "Use Tetgen"         OFF)
 option(LIBIGL_WITH_TRIANGLE          "Use Triangle"       OFF)
 option(LIBIGL_WITH_VIEWER            "Use OpenGL viewer"  ON)
 option(LIBIGL_WITH_XML               "Use XML"            OFF)
-
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  roslaunch
-  std_msgs
-  geometry_msgs
-  message_generation
-)
-
-## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
 
 find_package(LIBIGL REQUIRED QUIET)
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -185,7 +186,7 @@ add_executable(CortexWorld src/CortexWorld.cpp src/Viewer.cpp src/CortexTypes.cp
 # )
 #target_link_libraries(CortexMap ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
 #target_link_libraries(CortexPlanner ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
-target_link_libraries(CortexWorld ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
+target_link_libraries(CortexWorld ${catkin_LIBRARIES} igl::core igl::opengl_glfw igl::png)
 #target_link_libraries(CortexViewer ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
 
 #############

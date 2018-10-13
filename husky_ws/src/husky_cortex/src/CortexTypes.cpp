@@ -2,6 +2,8 @@
 #include <igl/adjacency_list.h>
 #include <igl/readOBJ.h>
 #include <igl/boundary_loop.h>
+#include <igl/map_vertices_to_circle.h>
+#include <igl/harmonic.h>
 
 #include <iostream>
 using namespace husky_cortex;
@@ -26,6 +28,16 @@ CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, dou
         }
         std::cout<<"Loop "<<i<<"s length: "<<bdloops_[i].size()<<std::endl;
     }
+
+    // compute UV coordinates(parametrization)
+      // Map the boundary to a circle, preserving edge proportions
+    Eigen::MatrixXd bnd_uv;
+    Eigen::VectorXi bnd; // compue bnd loops again, this time save as Eigen Vector
+    igl::boundary_loop(F_, bnd);
+    igl::map_vertices_to_circle(V_, bnd, bnd_uv);
+    // Harmonic parametrization for the internal vertices
+    igl::harmonic(V_,F_,bnd,bnd_uv,1,V_uv_);
+    //V_uv_*=10.;
 
     updateMesh();
 }
