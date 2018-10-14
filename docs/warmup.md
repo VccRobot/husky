@@ -1,6 +1,6 @@
 # 小任务
 ## JOB
-* *部署*：依照部署指南在自己机器上部署[Husky项目](https://github.com/VccRobot/husky/warmup)，
+* *部署*：依照部署指南在自己机器上部署[Husky项目](https://github.com/VccRobot/husky/tree/warmup)，
 * *机器人移动控制* 在planpen地图(2d)中实现给定点的导航，例如：机器人初始位置为(0,0,0)，给定目标位置为(-1,-5,0)，用C++编写ROS程序控制机器人到达指定地点（忽略朝向）。附录有一些图片展示目标效果。
 开发环境：Ubuntu 14.04, ROS版本：indigo
 
@@ -13,7 +13,7 @@
 -----------------------------------------------------------
 ## 参考文献
 
-[项目代码](https://github.com/VccRobot/husky/warmup)
+[项目代码](https://github.com/VccRobot/husky/tree/warmup)
 
 [ROS入门书](http://lsi.vc.ehu.es/pablogn/investig/ROS/A Gentle Introduction to ROS.pdf)
 
