@@ -33,18 +33,22 @@ double velocity,coverRange;
 void simulate(){
     location = cortexWorld.meshmap_.location_.row(0);
     delta = next_waypoint - location;
-    std::cout<<"delta1: "<<delta<<std::endl;
-    delta.normalize();
-    std::cout<<"delta3: "<<delta<<std::endl;
-    std::cout<<"velocity: "<<velocity<<std::endl;
-    std::cout<<"simulateFreq: "<<simulateFreq<<std::endl;
+    //std::cout<<"next_waypoint: "<<next_waypoint<<std::endl;
+    //std::cout<<"delta1: "<<delta<<std::endl;
+    if(delta.norm()>0.000000001){
+        delta.normalize();
+    }
+    //std::cout<<"velocity: "<<velocity<<std::endl;
+    //std::cout<<"simulateFreq: "<<simulateFreq<<std::endl;
     delta = delta * velocity / double(simulateFreq);
-    std::cout<<"delta2: "<<delta<<std::endl;
+    //std::cout<<"delta2: "<<delta<<std::endl;
     cortexWorld.meshmap_.location_.row(0) += delta;
 }
 void planning(){
     std::cout<<"next_waypoint: "<<next_waypoint<<std::endl;
     std::cout<<"location: "<<location<<std::endl;
+    std::cout<<"Current H: "<<cortexWorld.meshmap_.getH()<<"\n";
+    std::cout<<"prev H: "<<cortexWorld.lastTanH_<<"\n";
     next_waypoint = cortexWorld.get_next_waypoint();
 }
 
@@ -66,7 +70,7 @@ void cortexWorldInit(){
     //nh.getParam()
 
     int colorScheme;
-    double x,y,z;
+    double x,y,z, bndDThreshold, normDThreshold;
     std::string meshPath,initLocation, baseTexture;
     std::vector<std::string> textures;
     
@@ -77,7 +81,9 @@ void cortexWorldInit(){
     ros::param::get("coverRange",coverRange);
     ros::param::get("baseTexture", baseTexture);
     textures.push_back(baseTexture);
-    ros::param::get("colorScheme", colorScheme);
+
+    ros::param::get("bndDThreshold", bndDThreshold);
+    ros::param::get("normDThreshold", normDThreshold);
 
 
     ROS_INFO("meshPath: %s\n initLocation:%s\n velocity:%lf\n coverRange:%lf\n\n\n",
@@ -86,7 +92,7 @@ void cortexWorldInit(){
     location = Eigen::Vector3d(x,y,z);
     next_waypoint = Eigen::Vector3d(x,y,z);
     meshmap = CortexMeshmap(meshPath, Eigen::Vector3d(x,y,z), velocity, coverRange);
-    cortexWorld = CortexWorld(meshmap);
+    cortexWorld = CortexWorld(meshmap, bndDThreshold, normDThreshold);
     cortexWorldViewer = Viewer(&cortexWorld, textures, colorScheme);
 
 
@@ -118,12 +124,12 @@ int main( int argc, char** argv )
         }
         counter++;
 
-        ROS_INFO("simulate loop #%d",counter);
+        //ROS_INFO("simulate loop #%d",counter);
         simulate();
         simulate_rate.sleep();
     }
     std::cout<<ros::ok()<<std::endl;
-    std::cout<<"Oh! Ros node edned!\n";
+    std::cout<<"Oh! Ros node ended!\n";
     ROS_INFO("Failed!");
 
 

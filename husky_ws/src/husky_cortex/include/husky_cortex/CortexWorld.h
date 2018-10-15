@@ -37,7 +37,7 @@ class CortexWorld{
     double lastTanH_, normDThreshold_;
 
     CortexWorld();
-    CortexWorld(CortexMeshmap meshmap);
+    CortexWorld(CortexMeshmap meshmap, double bndDThreshold, double normDThreshold);
     ~CortexWorld();
     //void next_waypointCallback(const geometry_msgs::PointConstPtr& msg){
     //   ROS_INFO("Next Waypoint: (%lf, %lf, %lf)",msg->x,msg->y,msg->z);

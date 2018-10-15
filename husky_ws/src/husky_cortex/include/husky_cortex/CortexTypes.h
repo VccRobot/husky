@@ -43,7 +43,7 @@ class CortexMeshmap: public CortexTypes{
     CortexMeshmap(){}
     CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange);
     // update meshmap and reebgraph according to current location
-    double boundaryDist(Eigen::Vector3d p);
+    void boundarySqrD(Eigen::Vector3d p, double& SqrD, int &loopi, int &vj);
     double getH();
     void updateMesh();
 };

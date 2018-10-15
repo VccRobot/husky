@@ -93,21 +93,31 @@ double getP2SegD(Eigen::Vector3d p1, Eigen::Vector3d p2, Eigen::Vector3d p){
 
     //ac.intersection(bd);
 }
-double CortexMeshmap::boundaryDist(Eigen::Vector3d p){
+void CortexMeshmap::boundarySqrD(Eigen::Vector3d p, double &SqrD, int &loopi, int &vj){
     double mdist=1000000000000.0;
-//    Eigen::MatrixXd P = 
-//    igl::project_to_line_segment(P,S,D,t,sqrD);
+    int mi,mj;
+    Eigen::Matrix<double,1,3> P, S, D, t, sqrD; 
+    P.row(0)=p;
 
     for(int i=0;i<bdloops_.size();i++){
         for(int j=0;j<bdloops_[i].size();j++){
             double dist;
             int p1i=bdloops_[i][j], p2i=bdloops_[i][(j+1)%bdloops_[i].size()];
-            dist = getP2SegD(V_.row(p1i),V_.row(p2i), p);
-            mdist = std::min(dist,mdist);
+            S.row(0)=V_.row(p1i);
+            D.row(0)=V_.row(p2i);
+
+            igl::project_to_line_segment(P,S,D,t,sqrD);
+
+            if(mdist > sqrD(0,0)){
+                mdist = sqrD(0,0);
+                mi=i;mj=j;
+            }
         }
     }
-    return mdist;
+    SqrD = mdist;
+    loopi = mi;
+    vj = mj;
 }
 double CortexMeshmap::getH(){
-    return location_(1,0);
+    return location_(0,0);
 }
