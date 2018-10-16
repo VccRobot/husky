@@ -10,6 +10,7 @@
 //#include <husky_cortex/reebgraph.h>
 //#include <husky_cortex/meshmap.h>
 
+#include <igl/serialize.h>
 #include <husky_cortex/CortexTypes.h>
 
 namespace husky_cortex{
@@ -17,7 +18,7 @@ namespace husky_cortex{
 class Planner;
 
 double clamp(double x, double upper, double lower);
-class CortexWorld{
+class CortexWorld : public igl::Serializable{
     public:
     // ROS MODULE
     //ros::Publisher meshmap_pub_, reebgraph_pub_;
@@ -36,6 +37,16 @@ class CortexWorld{
 
     double lastTanH_, normDThreshold_;
 
+    virtual void InitSerialization(){
+        this->Add(meshmap_, "meshmap_");
+        this->Add(planMode_  , "planMode_");
+        this->Add(normDir_  , "normDir_");
+        this->Add(tanDelta_, "tanDelta_");
+        this->Add(normDelta_, "normDelta_");
+        this->Add(bndDThreshold_, "bndDThreshold_");
+        this->Add(lastTanH_, "lastTanH_");
+        this->Add(normDThreshold_, "normDThreshold_");
+    }
     CortexWorld();
     CortexWorld(CortexMeshmap meshmap, double bndDThreshold, double normDThreshold);
     ~CortexWorld();

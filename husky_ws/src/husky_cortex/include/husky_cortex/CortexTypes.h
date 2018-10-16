@@ -1,11 +1,13 @@
 #pragma once
 #include <Eigen/Dense>
+#include <igl/serialize.h>
 //#include <husky_cortex/meshmap.h>
 //#include <husky_cortex/reebgraph.h>
 namespace husky_cortex{
-class CortexTypes{
+class CortexTypes : public igl::Serializable{
     public:
     virtual void toRosMsg(){};
+    virtual void InitSerialization(){}
 };
 class CortexReebgraph: public CortexTypes{
     public:
@@ -16,6 +18,12 @@ class CortexReebgraph: public CortexTypes{
     Eigen::VectorXi vtype_;
     Eigen::VectorXi etype_;
     public:
+    virtual void InitSerialization(){
+        this->Add(V_  , "V_");
+        this->Add(F_  , "F_");
+        this->Add(vtype_, "vtype_");
+        this->Add(etype_, "etype_");
+    }
     void split(double criticalH, std::string type1, std::string type2){
         
     }
@@ -40,6 +48,21 @@ class CortexMeshmap: public CortexTypes{
     Eigen::MatrixXd V_uv_;
 
     public:
+    virtual void InitSerialization(){
+        this->Add(location_, "location_");
+        this->Add(V_  , "V_");
+        this->Add(F_  , "F_");
+        this->Add(reebgraph_, "reebgraph_");
+        this->Add(vstat_, "vstat_");
+        this->Add(reebi_, "reebi_");
+        this->Add(h_, "h_");
+        this->Add(velocity_, "velocity_");
+        this->Add(coverRange_, "coverRange_");
+        this->Add(bdloops_, "bdloops_");
+        this->Add(vbdP1, "vbdP1");
+        this->Add(vbdP2, "vbdP2");
+        this->Add(V_uv_, "V_uv_");
+    }
     CortexMeshmap(){}
     CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange);
     // update meshmap and reebgraph according to current location

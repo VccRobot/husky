@@ -9,6 +9,7 @@
 
 #include <ros/ros.h>
 #include <igl/readOBJ.h>
+#include <igl/serialize.h>
 #include <husky_cortex/CortexWorld.h>
 #include <husky_cortex/Viewer.h>
 
@@ -23,6 +24,7 @@ CortexMeshmap meshmap;
 CortexWorld cortexWorld;
 Viewer cortexWorldViewer;
 
+std::string resourcePath, mode;
 std::thread cortexWorldViewerThread;
 std::thread rosThread;
 Eigen::Vector3d location,next_waypoint,delta;
@@ -40,7 +42,7 @@ void simulate(){
     }
     //std::cout<<"velocity: "<<velocity<<std::endl;
     //std::cout<<"simulateFreq: "<<simulateFreq<<std::endl;
-    delta = delta * velocity / double(simulateFreq);
+    delta = delta * cortexWorld.meshmap_.velocity_ / double(simulateFreq);
     //std::cout<<"delta2: "<<delta<<std::endl;
     cortexWorld.meshmap_.location_.row(0) += delta;
 }
@@ -74,30 +76,44 @@ void cortexWorldInit(){
     std::string meshPath,initLocation, baseTexture;
     std::vector<std::string> textures;
     
-    ros::param::get("meshPath",meshPath);
-    ros::param::get("initLocation", initLocation);
-    std::stringstream(initLocation) >> x >> y >> z;
-    ros::param::get("velocity", velocity);
-    ros::param::get("coverRange",coverRange);
+    ros::param::get("resourcePath", resourcePath);
+    ros::param::get("mode", mode);
+    if(mode=="load"){
+        std::string loadPath;
+        ros::param::get("loadPath", loadPath);
+        igl::deserialize(cortexWorld, "cortexWorld", loadPath);
+        ROS_INFO("Serialized cortexWorld loaded!");
+    }else{
+        ros::param::get("meshPath",meshPath);
+        ros::param::get("initLocation", initLocation);
+        std::stringstream(initLocation) >> x >> y >> z;
+        ros::param::get("velocity", velocity);
+        ros::param::get("coverRange",coverRange);
+
+        ros::param::get("bndDThreshold", bndDThreshold);
+        ros::param::get("normDThreshold", normDThreshold);
+
+
+        ROS_INFO("meshPath: %s\n initLocation:%s\n velocity:%lf\n coverRange:%lf\n\n\n",
+            meshPath.c_str(), initLocation.c_str(), velocity, coverRange);
+
+        location = Eigen::Vector3d(x,y,z);
+        next_waypoint = Eigen::Vector3d(x,y,z);
+        meshmap = CortexMeshmap(meshPath, Eigen::Vector3d(x,y,z), velocity, coverRange);
+        cortexWorld = CortexWorld(meshmap, bndDThreshold, normDThreshold);
+    }
+
     ros::param::get("baseTexture", baseTexture);
     textures.push_back(baseTexture);
-
-    ros::param::get("bndDThreshold", bndDThreshold);
-    ros::param::get("normDThreshold", normDThreshold);
-
-
-    ROS_INFO("meshPath: %s\n initLocation:%s\n velocity:%lf\n coverRange:%lf\n\n\n",
-        meshPath.c_str(), initLocation.c_str(), velocity, coverRange);
-
-    location = Eigen::Vector3d(x,y,z);
-    next_waypoint = Eigen::Vector3d(x,y,z);
-    meshmap = CortexMeshmap(meshPath, Eigen::Vector3d(x,y,z), velocity, coverRange);
-    cortexWorld = CortexWorld(meshmap, bndDThreshold, normDThreshold);
+    ros::param::get("colorScheme", colorScheme);
     cortexWorldViewer = Viewer(&cortexWorld, textures, colorScheme);
-
-
 }
-
+void viewerThread(){
+    cortexWorldViewer.launch();
+    if(mode=="record"){
+        igl::serialize(cortexWorld, "cortexWorld", resourcePath+"/serialized/record", true);
+    }
+}
 int main( int argc, char** argv )
 {
     ros::init(argc, argv, "CortexWorld");
@@ -106,7 +122,8 @@ int main( int argc, char** argv )
 
     std::cout<<ros::ok()<<std::endl;
     //rosThread = std::thread(&rosRunLoop);
-    cortexWorldViewerThread = std::thread(&husky_cortex::Viewer::launch, &cortexWorldViewer);
+    //cortexWorldViewerThread = std::thread(&husky_cortex::Viewer::launch, &cortexWorldViewer);
+    cortexWorldViewerThread = std::thread(&viewerThread);
     // /rosRunLoop();
 
     std::cout<<ros::ok()<<std::endl;
