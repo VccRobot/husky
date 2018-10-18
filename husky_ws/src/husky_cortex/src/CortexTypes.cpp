@@ -5,6 +5,7 @@
 #include <igl/map_vertices_to_circle.h>
 #include <igl/harmonic.h>
 #include <igl/project_to_line_segment.h>
+#include <igl/segment_segment_intersect.h>
 
 #include <iostream>
 using namespace husky_cortex;
@@ -121,3 +122,21 @@ void CortexMeshmap::boundarySqrD(Eigen::Vector3d p, double &SqrD, int &loopi, in
 double CortexMeshmap::getH(){
     return location_(0,0);
 }
+bool CortexMeshmap::boundaryIntersect(Eigen::Vector3d s,Eigen::Vector3d d, int &wfloopi, int &wfvj){
+    for(int i=0;i<bdloops_.size();i++){
+        for(int j=0;j<bdloops_[i].size();j++){
+            double dist,t,u;
+            int p1i=bdloops_[i][j], p2i=bdloops_[i][(j+1)%bdloops_[i].size()];
+            Eigen::Vector3d p=V_.row(p1i),q=V_.row(p2i);
+            Eigen::Vector3d d1=d-s, d2=q-p;
+
+            if(igl::segments_intersect(s,d1,p,d2,t,u)==true){
+                wfloopi=i;
+                wfvj=j;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+

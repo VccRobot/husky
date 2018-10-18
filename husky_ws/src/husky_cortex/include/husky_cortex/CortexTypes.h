@@ -68,6 +68,7 @@ class CortexMeshmap: public CortexTypes{
     // update meshmap and reebgraph according to current location
     void boundarySqrD(Eigen::Vector3d p, double& SqrD, int &loopi, int &vj);
     double getH();
+    bool boundaryIntersect(Eigen::Vector3d s,Eigen::Vector3d d, int &wfloopi, int &wfvj);
     void updateMesh();
 };
 

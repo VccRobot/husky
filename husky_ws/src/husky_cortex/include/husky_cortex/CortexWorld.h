@@ -36,6 +36,7 @@ class CortexWorld : public igl::Serializable{
     double bndDThreshold_;
 
     double lastTanH_, normDThreshold_;
+    int wfloopi_, wfvj_; //wall following loop and vertex index
 
     virtual void InitSerialization(){
         this->Add(meshmap_, "meshmap_");
@@ -46,6 +47,8 @@ class CortexWorld : public igl::Serializable{
         this->Add(bndDThreshold_, "bndDThreshold_");
         this->Add(lastTanH_, "lastTanH_");
         this->Add(normDThreshold_, "normDThreshold_");
+        this->Add(wfloopi_, "wfloopi_");
+        this->Add(wfvj_, "wfvj_");
     }
     CortexWorld();
     CortexWorld(CortexMeshmap meshmap, double bndDThreshold, double normDThreshold);

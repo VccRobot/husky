@@ -1,5 +1,6 @@
 #pragma once
 #include <igl/opengl/glfw/Viewer.h>
+#include <igl/opengl/glfw/imgui/ImGuiMenu.h>
 #include <husky_cortex/CortexWorld.h>
 namespace husky_cortex{
 class Viewer{
@@ -8,6 +9,8 @@ class Viewer{
     husky_cortex::CortexWorld *cortexWorld_;
     std::vector<std::string> textureFiles_;
     int colorScheme_;
+
+    igl::opengl::glfw::imgui::ImGuiMenu menu_;
 
     public:
     void launch(){

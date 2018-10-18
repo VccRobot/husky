@@ -34,7 +34,7 @@ option(LIBIGL_WITH_MATLAB            "Use Matlab"         OFF)
 option(LIBIGL_WITH_MOSEK             "Use MOSEK"          OFF)
 option(LIBIGL_WITH_OPENGL            "Use OpenGL"         ON)
 option(LIBIGL_WITH_OPENGL_GLFW       "Use GLFW"           ON)
-option(LIBIGL_WITH_OPENGL_GLFW_IMGUI "Use ImGui"          OFF)
+option(LIBIGL_WITH_OPENGL_GLFW_IMGUI "Use ImGui"          ON)
 option(LIBIGL_WITH_PNG               "Use PNG"            ON)
 option(LIBIGL_WITH_PYTHON            "Use Python"         OFF)
 option(LIBIGL_WITH_TETGEN            "Use Tetgen"         OFF)
@@ -186,7 +186,7 @@ add_executable(CortexWorld src/CortexWorld.cpp src/Viewer.cpp src/CortexTypes.cp
 # )
 #target_link_libraries(CortexMap ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
 #target_link_libraries(CortexPlanner ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
-target_link_libraries(CortexWorld ${catkin_LIBRARIES} igl::core igl::opengl_glfw igl::png)
+target_link_libraries(CortexWorld ${catkin_LIBRARIES} igl::core igl::opengl_glfw igl::png igl::opengl_glfw_imgui)
 #target_link_libraries(CortexViewer ${catkin_LIBRARIES} igl::core igl::opengl_glfw)
 
 #############

@@ -48,10 +48,18 @@ void simulate(){
     cortexWorld.meshmap_.location_.row(0) += delta;
 }
 void planning(){
-    std::cout<<"next_waypoint: "<<next_waypoint<<std::endl;
-    std::cout<<"location: "<<location<<std::endl;
+    std::cout<<"\n****************************************\n";
+    std::cout<<"next_waypoint: \n"<<next_waypoint<<std::endl;
+    std::cout<<"location: \n"<<location<<std::endl;
+    std::cout<<"tanDelta: \n"<<cortexWorld.tanDelta_<<std::endl;
     std::cout<<"Current H: "<<cortexWorld.meshmap_.getH()<<"\n";
     std::cout<<"prev H: "<<cortexWorld.lastTanH_<<"\n";
+    std::cout<<"Planmode: "<<cortexWorld.planMode_<<"\n";
+    std::cout<<"wfloopi_: "<<cortexWorld.wfloopi_<<"\n";
+    std::cout<<"wfvj_: "<<cortexWorld.wfvj_<<"\n";
+    std::cout<<"loop[i][j]: "<<cortexWorld.meshmap_.bdloops_[cortexWorld.wfloopi_][cortexWorld.wfvj_]<<"\n";
+    std::cout<<"****************************************\n";
+
     next_waypoint = cortexWorld.get_next_waypoint();
 }
 

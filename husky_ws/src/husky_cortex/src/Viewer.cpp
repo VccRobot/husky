@@ -9,6 +9,7 @@ using namespace husky_cortex;
 CortexWorld *cworld;
 Eigen::MatrixXd bdP1(3,3),bdP2(3,3);
 int viewerColorScheme=0;
+Eigen::Matrix<double,1,3> intersection;
 bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     using namespace Eigen;
     using namespace std;
@@ -16,6 +17,9 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     CortexMeshmap &meshmap(cworld->meshmap_);
 
     viewer.data().set_points(meshmap.location_,RowVector3d(1,.0,.0));
+//    int intersectionI = meshmap.bdloops_[cworld->wfloopi_][cworld->wfvj_];
+//    intersection.row(0)=meshmap.V_.row(intersectionI);
+//    viewer.data().add_points(intersection,RowVector3d(0, 1.,.0));
 
     meshmap.updateMesh();
 
@@ -46,7 +50,9 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     viewer.data().add_edges(bdP1,bdP2, RowVector3d(1,0,0)); 
     return false;
 }
- 
+
+
+igl::opengl::glfw::imgui::ImGuiMenu menu;
 husky_cortex::Viewer::Viewer(CortexWorld *cortexWorld, std::vector<std::string> textureFiles, int colorScheme)
 :cortexWorld_(cortexWorld), textureFiles_(textureFiles), colorScheme_(colorScheme){
     cworld = cortexWorld;
@@ -70,5 +76,8 @@ husky_cortex::Viewer::Viewer(CortexWorld *cortexWorld, std::vector<std::string> 
     Eigen::Matrix<unsigned char,Eigen::Dynamic,Eigen::Dynamic> R,G,B,A;
     igl::png::readPNG(textureFiles_[0],R,G,B,A);
     viewer_.data().set_texture(R,G,B);
+
+
+    viewer_.plugins.push_back(&menu);
 
 }

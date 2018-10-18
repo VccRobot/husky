@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 
 <launch>
-    <param name="mode" value="1"/>
+    <param name="mode" value="0"/>
     <param name="resourcePath" value="$(find husky_cortex)/data" />
     <param name="loadPath" value="$(find husky_cortex)/data/serialized/record" />
     <param name="savePath" value="$(find husky_cortex)/data/serialized/record" />
     <param name="meshPath" value="$(find husky_cortex)/data/planehole.obj" />
-    <param name="initLocation" value="-241. 5.0 -193." />
+    <param name="initLocation" value="-101. 0.0 -173." />
     <param name="velocity" value="100." />
     <param name="coverRange" value="30." />
     <param name="colorScheme" value="1"/>
 
-    <param name="normDThreshold" value="50."/>
-    <param name="bndDThreshold" value="20."/>
+    <param name="normDThreshold" value="20."/>
+    <param name="bndDThreshold" value="40."/>
 
     <param name="baseTexture" value="$(find husky_cortex)/data/paper.png"/>
 
