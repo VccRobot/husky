@@ -24,7 +24,8 @@ CortexMeshmap meshmap;
 CortexWorld cortexWorld;
 Viewer cortexWorldViewer;
 
-std::string resourcePath, mode;
+std::string resourcePath, loadPath, savePath;
+int mode; // 0th digit indicates load, 1th digit indicates save
 std::thread cortexWorldViewerThread;
 std::thread rosThread;
 Eigen::Vector3d location,next_waypoint,delta;
@@ -78,9 +79,10 @@ void cortexWorldInit(){
     
     ros::param::get("resourcePath", resourcePath);
     ros::param::get("mode", mode);
-    if(mode=="load"){
-        std::string loadPath;
-        ros::param::get("loadPath", loadPath);
+    ros::param::get("loadPath", loadPath);
+    ros::param::get("savePath", savePath);
+    // load mode
+    if( (mode & 1) > 0){
         igl::deserialize(cortexWorld, "cortexWorld", loadPath);
         ROS_INFO("Serialized cortexWorld loaded!");
     }else{
@@ -110,8 +112,8 @@ void cortexWorldInit(){
 }
 void viewerThread(){
     cortexWorldViewer.launch();
-    if(mode=="record"){
-        igl::serialize(cortexWorld, "cortexWorld", resourcePath+"/serialized/record", true);
+    if((mode&2)>0){ // save mode
+        igl::serialize(cortexWorld, "cortexWorld", savePath, true);
     }
 }
 int main( int argc, char** argv )
