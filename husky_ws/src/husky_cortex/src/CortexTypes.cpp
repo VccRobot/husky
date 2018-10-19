@@ -130,7 +130,10 @@ bool CortexMeshmap::boundaryIntersect(Eigen::Vector3d s,Eigen::Vector3d d, int &
             Eigen::Vector3d p=V_.row(p1i),q=V_.row(p2i);
             Eigen::Vector3d d1=d-s, d2=q-p;
 
-            if(igl::segments_intersect(s,d1,p,d2,t,u)==true){
+            bool intersected = igl::segments_intersect(s,d1,p,d2,t,u);
+            if( intersected==true && t>=0. && t<=1. && u>=0. && u<=1.){
+                std::cout<<"Found Intersection! ----------------------\n";
+                std::cout<<s<<"\n\n"<<d1<<"\n\n"<<p<<"\n\n"<<d2<<"\n\n"<<t<<"\n\n"<<u<<"\n\n";
                 wfloopi=i;
                 wfvj=j;
                 return true;

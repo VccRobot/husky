@@ -5,6 +5,7 @@
 // %Tag(FULLTEXT)%
 // %Tag(INCLUDES)%
 #include <husky_cortex/CortexWorld.h>
+#include <iostream>
 
 using namespace husky_cortex;
 
@@ -31,7 +32,7 @@ Eigen::Vector3d CortexWorld::get_next_waypoint(){
     // moving
     if(planMode_==0){
 
-        bool intersect= meshmap_.boundaryIntersect(current, current+tanDelta_, loopi, vj);
+        bool intersect= meshmap_.boundaryIntersect(current, current+tanDelta_*bndDThreshold_, loopi, vj);
 
         // if is too close to the wall then switching mode
         if(intersect){
@@ -39,6 +40,13 @@ Eigen::Vector3d CortexWorld::get_next_waypoint(){
             lastTanH_ = meshmap_.getH();
             wfloopi_ = loopi;
             wfvj_ = vj;
+            std::cout<<"INTERSECTION INFO!!!!!!!!!!!!!!!!!!!\n";
+            std::cout<<"LOCATION:\n";
+            std::cout<< current<<"\n\n"<<current+tanDelta_ <<"\n"<<meshmap_.bdloops_[loopi][vj]<<"\n";
+            std::cout<<"INTERSECTED SEGMENTS!!!!!!!!!!!!!!!!!!!\n";
+            Eigen::Vector3d start = meshmap_.V_.row(meshmap_.bdloops_[loopi][vj]);
+            Eigen::Vector3d end = meshmap_.V_.row(meshmap_.bdloops_[loopi][(vj+1)%meshmap_.bdloops_[loopi].size()]);
+            std::cout<<start << "\n\n"<< end << "\n";
         }else{
             nxt = current + tanDelta_*bndDThreshold_;
         }
