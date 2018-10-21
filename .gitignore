@@ -13,3 +13,4 @@ logs
 /.vscode
 *.pyc
 site
+/auxiliary

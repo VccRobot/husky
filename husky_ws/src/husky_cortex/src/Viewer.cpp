@@ -8,8 +8,11 @@ using namespace husky_cortex;
 //bool husky_cortex::Viewer::pre_draw(){
 CortexWorld *cworld;
 Eigen::MatrixXd bdP1(3,3),bdP2(3,3);
+Eigen::MatrixXd crits;
 int viewerColorScheme=0;
 Eigen::Matrix<double,1,3> intersection;
+int lastSeenIndex=0;
+
 bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     using namespace Eigen;
     using namespace std;
@@ -28,6 +31,19 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     igl::ColorMapType color = static_cast<igl::ColorMapType>(viewerColorScheme);
     igl::colormap(color,meshmap.vstat_,true,C);
     viewer.data().set_colors(C);
+
+    // add criticle points visualization
+    std::vector<int> seenCrits;
+//    for(int i=0;i<meshmap.criticalPoints_.size();i++)
+    int newSeenNum = meshmap.criticalPoints_.size() - lastSeenIndex;
+    if( newSeenNum >0){
+        crits.resize( newSeenNum,3);
+        for(int i=0;i<newSeenNum;i++){
+            crits.row(i) = meshmap.V_.row(meshmap.criticalPoints_[lastSeenIndex+i]);
+        }
+        lastSeenIndex = meshmap.criticalPoints_.size();
+        viewer.data().add_points(crits, RowVector3d(0,1.,.0));
+    }
 
     // add boundary edges visualization
     std::vector< Eigen::Vector3d > vbdP1,vbdP2;

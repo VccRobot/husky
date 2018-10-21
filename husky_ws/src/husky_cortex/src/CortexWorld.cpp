@@ -83,14 +83,13 @@ Eigen::Vector3d CortexWorld::get_next_waypoint(){
             Eigen::Vector3d vecNormal=Eigen::Vector3d(0., 1., 0.).cross(vec);
             vecNormal.normalize();
             Eigen::Vector3d next = pgoal + vecNormal * (bndDThreshold_+1.);
-            //if((next(0)-meshmap_.location_(0,0))*normDir_ > 0){
-            
-            nxt = next - current;
-            nxt.normalize();
-            nxt = current + nxt * 20.;
-            //}else{
-                //planMode_ = 0;
-            //}
+            if((next(0)-meshmap_.location_(0,0))*normDir_ > 0){
+                nxt = next - current;
+                nxt.normalize();
+                nxt = current + nxt * 20.;
+            }else{
+                planMode_ = 0;
+            }
             //nxt += normDelta_;
         }
     }

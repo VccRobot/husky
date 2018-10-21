@@ -5,13 +5,13 @@
     <param name="resourcePath" value="$(find husky_cortex)/data" />
     <param name="loadPath" value="$(find husky_cortex)/data/serialized/record" />
     <param name="savePath" value="$(find husky_cortex)/data/serialized/record" />
-    <param name="meshPath" value="$(find husky_cortex)/data/planehole2.obj" />
-    <param name="initLocation" value="-260. 0.0 -220." />
-    <param name="velocity" value="130." />
+    <param name="meshPath" value="$(find husky_cortex)/data/planehole3.obj" />
+    <param name="initLocation" value="-353. 0.0 0." />
+    <param name="velocity" value="100." />
     <param name="coverRange" value="20." />
     <param name="colorScheme" value="3"/>
 
-    <param name="normDThreshold" value="15."/>
+    <param name="normDThreshold" value="30."/>
     <param name="bndDThreshold" value="5."/>
 
     <param name="baseTexture" value="$(find husky_cortex)/data/paper.png"/>

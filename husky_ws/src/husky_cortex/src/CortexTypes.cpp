@@ -22,7 +22,7 @@ CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, dou
     reebi_= Eigen::VectorXi::Constant(vn,0);
     h_= Eigen::VectorXd::Constant(vn,.0);
 
-    // get boundaries    
+    // get boundaries and critical points
     igl::boundary_loop(F_, bdloops_);
     for(int i=0;i<bdloops_.size();i++){
         for(int j=0;j<bdloops_[i].size();j++){
@@ -30,6 +30,7 @@ CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, dou
         }
         std::cout<<"Loop "<<i<<"s length: "<<bdloops_[i].size()<<std::endl;
     }
+
     // squeeze the boundaries to start and end point list 
     for(int i=0;i<bdloops_.size();i++){
         for(int j=0;j<bdloops_[i].size();j++){
@@ -57,31 +58,27 @@ CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, dou
 void CortexMeshmap::updateMesh(){
     for(int i=0;i<V_.rows();i++){
         if( (location_.row(0) - V_.row(i)).norm()<coverRange_ ){
-            // checking old critical points
-            // TODO
-            if(vstat_(i)==1){
-                continue;
-            }
             vstat_(i)=1;
-            continue;
-            // checking new critical points
-
-            double maxh=-10000000.,minh=10000000.;
-            for(int adji=0;adji<graph_[i].size();adji++){
-                int adjv = graph_[i][adji];
-                if(vstat_[adjv]==1 && vtype_[adjv]>=1){
-                    maxh=std::max(maxh,h_[adjv]);
-                    minh=std::min(minh,h_[adjv]);
-                }
-            }
-
-            // encountered new split point
-            if(h_[i]< minh){
-                reebgraph_.split(h_[i], "lower", "lower");
-            }
+        }
+    }
+    for(int i=0;i<bdloops_.size();i++){
+        for(int j=0;j<bdloops_[i].size();j++){
+            int nextIndex=(j+1)%bdloops_[i].size();
+            int prevIndex=(j-1)%bdloops_[i].size();
+            int p1i = bdloops_[i][prevIndex], p2i=bdloops_[i][j], p3i=bdloops_[i][nextIndex];
+            Eigen::Vector3d p1=V_.row(p1i),p2=V_.row(p2i),p3=V_.row(p3i);
+            if(vstat_(p2i)==0) {continue;}
             // encountered new merge point
-            if(h_[i] > maxh){
+            if( p1(0)<p2(0) && p2(0)>p3(0) ) {
+                vtype_(p2i)=2;
+                criticalPoints_.push_back(p2i);
                 reebgraph_.split(h_[i], "lower", "upper");
+            }
+            // encountered new split point
+            if( p1(0)>p2(0) && p2(0)<p3(0) ){
+                vtype_(p2i)=2;
+                criticalPoints_.push_back(p2i);
+                reebgraph_.split(h_[i], "lower", "lower");
             }
         }
     }

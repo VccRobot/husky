@@ -40,10 +40,12 @@ class CortexMeshmap: public CortexTypes{
     Eigen::VectorXi vstat_;
     Eigen::VectorXi reebi_;
     Eigen::VectorXd h_; // value of morse function
-    double velocity_, coverRange_;
+    double velocity_, coverRange_, sightRange_;
 
     std::vector<std::vector<int> >bdloops_;
     std::vector< Eigen::Vector3d > vbdP1,vbdP2;//start and end points of boundaries
+
+    std::vector<int> criticalPoints_;
 
     Eigen::MatrixXd V_uv_;
 
@@ -58,9 +60,11 @@ class CortexMeshmap: public CortexTypes{
         this->Add(h_, "h_");
         this->Add(velocity_, "velocity_");
         this->Add(coverRange_, "coverRange_");
+        this->Add(sightRange_, "sightRange_");
         this->Add(bdloops_, "bdloops_");
         this->Add(vbdP1, "vbdP1");
         this->Add(vbdP2, "vbdP2");
+        this->Add(criticalPoints_, "criticalPoints_");
         this->Add(V_uv_, "V_uv_");
     }
     CortexMeshmap(){}
