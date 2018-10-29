@@ -30,7 +30,7 @@ std::thread cortexWorldViewerThread;
 std::thread rosThread;
 Eigen::Vector3d location,next_waypoint,delta;
 
-int simulateFreq=100, planningFreq=20;
+int simulateFreq=100, planningFreq=20, scanningFreq=5;
 
 double velocity,coverRange;
 void simulate(){
@@ -62,7 +62,9 @@ void planning(){
 
     next_waypoint = cortexWorld.get_next_waypoint();
 }
-
+void scanning(){
+    cortexWorld.meshmap_.scan();
+}
 void rosRunLoop(){
     //Initializes ROS, and sets up a node
     //meshmap_pub_ = node_.advertise<husky_cortex::meshmap>("/meshmap", 100);
@@ -140,14 +142,19 @@ int main( int argc, char** argv )
 
     std::cout<<"Oh! Ros node started!\n";
     srand(time(0));
-    ros::Rate simulate_rate(simulateFreq);
+    ros::Rate simulate_rate(simulateFreq), baseRate=simulate_rate;
     int planning_rate = simulateFreq / planningFreq;
+    int scanning_rate = simulateFreq / scanningFreq;
     int counter = 0;
     while(ros::ok()){
         ros::spinOnce();
-        if(counter%planning_rate==0){
-            ROS_INFO("planning loop #%d",counter/planning_rate);
-            planning();
+        //if(counter%planning_rate==0){
+        //    ROS_INFO("planning loop #%d",counter/planning_rate);
+        //    planning();
+        //}
+        if(counter%scan_rate==0){
+            ROS_INFO("planning loop #%d",counter/scan_rate);
+            scanning();
         }
         counter++;
 
