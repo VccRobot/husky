@@ -74,11 +74,17 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     viewer.data().add_edges(bdP1,bdP2, RowVector3d(1,0,0)); 
     return false;
 }
-
+unsigned char UP_KEY(9),DOWN_KEY(8),LEFT_KEY(7),RIGHT_KEY(6),PAGEUP_KEY(10),PAGEDOWN_KEY(11);
+unsigned char lastKey(0);
+bool key_up(igl::opengl::glfw::Viewer& viewer, unsigned char key, int modifer){
+    if(lastKey==UP_KEY || lastKey==DOWN_KEY || lastKey==LEFT_KEY || lastKey==DOWN_KEY){
+        cworld->meshmap_.nextWayPoint_ = Eigen::Vector3d(cworld->meshmap_.location_.row(0));
+    }
+    return false;
+}
 bool key_down(igl::opengl::glfw::Viewer& viewer, unsigned char key, int modifer){
     Eigen::Vector3d dir(0.,0.,0.);
     std::cout<<"Key: "<<key<<" "<<(unsigned int)key<<std::endl;
-    unsigned char UP_KEY(9),DOWN_KEY(8),LEFT_KEY(7),RIGHT_KEY(6),PAGEUP_KEY(10),PAGEDOWN_KEY(11);
     if(key==UP_KEY){
         dir = Eigen::Vector3d(0.,0.,-1000.);
     }else if(key==LEFT_KEY){
@@ -112,6 +118,7 @@ husky_cortex::Viewer::Viewer(CortexWorld *cortexWorld, std::vector<std::string> 
     //viewer_.core.trackball_angle.normalize();
     viewer_.callback_pre_draw = &(pre_draw);
     viewer_.callback_key_down = &key_down;
+    viewer_.callback_key_up = &key_up;
     viewer_.core.is_animating = true;
     viewer_.core.animation_max_fps = 30.;
     
