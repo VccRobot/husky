@@ -6,12 +6,14 @@
 #include <igl/harmonic.h>
 #include <igl/project_to_line_segment.h>
 #include <igl/segment_segment_intersect.h>
+#include <igl/PI.h>
 
 #include <iostream>
+#include <cmath>
 using namespace husky_cortex;
 
-CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange)
-:velocity_(velocity),coverRange_(coverRange){
+CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange, double sightRange, double scanPerFrame)
+:velocity_(velocity),coverRange_(coverRange),sightRange_(sightRange),scanPerFrame_(scanPerFrame){
     igl::readOBJ(meshpath, V_, F_);
 
     igl::adjacency_list(F_, graph_);
@@ -68,6 +70,7 @@ void CortexMeshmap::updateMesh(){
             int p1i = bdloops_[i][prevIndex], p2i=bdloops_[i][j], p3i=bdloops_[i][nextIndex];
             Eigen::Vector3d p1=V_.row(p1i),p2=V_.row(p2i),p3=V_.row(p3i);
             if(vstat_(p2i)==0) {continue;}
+            if(vtype_(p2i)==2) {continue;}
             // encountered new merge point
             if( p1(0)<p2(0) && p2(0)>p3(0) ) {
                 vtype_(p2i)=2;
@@ -139,4 +142,46 @@ bool CortexMeshmap::boundaryIntersect(Eigen::Vector3d s,Eigen::Vector3d d, int &
     }
     return false;
 }
+bool CortexMeshmap::rayBoundaryIntersect(Eigen::Vector3d s,Eigen::Vector3d d, int &wfloopi, int &wfvj, double &t){
+    double mint =100000000000.0;
+    wfloopi = -1; wfvj = -1;
+    for(int i=0;i<bdloops_.size();i++){
+        for(int j=0;j<bdloops_[i].size();j++){
+            double dist,t,u;
+            int p1i=bdloops_[i][j], p2i=bdloops_[i][(j+1)%bdloops_[i].size()];
+            Eigen::Vector3d p=V_.row(p1i),q=V_.row(p2i);
+            Eigen::Vector3d d1=d-s, d2=q-p;
 
+            bool intersected = igl::segments_intersect(s,d1,p,d2,t,u);
+            if( intersected==true && t>=0. && u>=0. && u<=1.){
+                if( t < mint ){
+                    std::cout<<"Found Ray Intersection! ----------------------\n";
+                    std::cout<<s<<"\n\n"<<d1<<"\n\n"<<p<<"\n\n"<<d2<<"\n\n"<<t<<"\n\n"<<u<<"\n\n";
+                    wfloopi=i;
+                    wfvj=j;
+                    mint = t;
+                }
+            }
+        }
+    }
+    if(wfloopi==-1){
+        return false;
+    }else{
+        t = mint;
+        std::cout<<"Found Ray Intersection! ----------------------\n";
+        std::cout<<" min t: "<< t<<"\n\n";
+
+        return true;
+    }
+}
+void CortexMeshmap::scan(){
+    Eigen::MatrixXd dirs = Eigen::MatrixXd::Random(1,scanPerFrame_);
+    for(int i=0; i<scanPerFrame_; i++){
+        int wfloopi, wfvj;
+        double theta = (1.+dirs(0,i))*igl::PI, t;
+        double dirx = std::cos(theta), diry = std::sin(theta);
+        Eigen::Vector3d s = location_.row(0), d(dirx,0.,diry);
+        rayBoundaryIntersect(s, s+d, wfloopi, wfvj, t);
+        scanPoints_.push_back(s + d*t);
+    }
+}

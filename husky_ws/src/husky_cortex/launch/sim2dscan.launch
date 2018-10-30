@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<launch>
+    <param name="mode" value="0"/>
+    <param name="resourcePath" value="$(find husky_cortex)/data" />
+    <param name="loadPath" value="$(find husky_cortex)/data/serialized/record" />
+    <param name="savePath" value="$(find husky_cortex)/data/serialized/record" />
+    <param name="meshPath" value="$(find husky_cortex)/data/planehole3.obj" />
+    <param name="initLocation" value="-353. 0.0 0." />
+    <param name="velocity" value="100." />
+    <param name="coverRange" value="20." />
+    <param name="sightRange" value="20." />
+    <param name="scanPerFrame" value="10" />
+    <param name="colorScheme" value="3"/>
+
+    <param name="normDThreshold" value="30."/>
+    <param name="bndDThreshold" value="5."/>
+
+    <param name="baseTexture" value="$(find husky_cortex)/data/paper.png"/>
+
+
+    <param name="simulateFreq" value="100"/>
+    <param name="planningFreq" value="20"/>
+    <param name="scanningFreq" value="1"/>
+
+    <node name="cortexWorld" pkg="husky_cortex" type="CortexWorld" output="screen"/>
+
+</launch>

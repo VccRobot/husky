@@ -40,7 +40,7 @@ class CortexMeshmap: public CortexTypes{
     Eigen::VectorXi vstat_;
     Eigen::VectorXi reebi_;
     Eigen::VectorXd h_; // value of morse function
-    double velocity_, coverRange_;
+    double velocity_, coverRange_, sightRange_;
 
     std::vector<std::vector<int> >bdloops_;
     std::vector< Eigen::Vector3d > vbdP1,vbdP2;//start and end points of boundaries
@@ -48,6 +48,10 @@ class CortexMeshmap: public CortexTypes{
     std::vector<int> criticalPoints_;
 
     Eigen::MatrixXd V_uv_;
+
+    // scan variables
+    int scanPerFrame_;
+    std::vector<Eigen::Vector3d> scanPoints_;
 
     public:
     virtual void InitSerialization(){
@@ -65,15 +69,18 @@ class CortexMeshmap: public CortexTypes{
         this->Add(vbdP1, "vbdP1");
         this->Add(vbdP2, "vbdP2");
         this->Add(criticalPoints_, "criticalPoints_");
+        this->Add(scanPoints_, "scanPoints_");
         this->Add(V_uv_, "V_uv_");
     }
     CortexMeshmap(){}
-    CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange);
+    CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange, double sightRange, double scanPerFrame=0.);
     // update meshmap and reebgraph according to current location
     void boundarySqrD(Eigen::Vector3d p, double& SqrD, int &loopi, int &vj);
     double getH();
     bool boundaryIntersect(Eigen::Vector3d s,Eigen::Vector3d d, int &wfloopi, int &wfvj);
+    bool rayBoundaryIntersect(Eigen::Vector3d s,Eigen::Vector3d d, int &wfloopi, int &wfvj,double &t);
     void updateMesh();
+    void scan();
 };
 
 }

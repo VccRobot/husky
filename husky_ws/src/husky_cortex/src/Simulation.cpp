@@ -32,7 +32,8 @@ Eigen::Vector3d location,next_waypoint,delta;
 
 int simulateFreq=100, planningFreq=20, scanningFreq=5;
 
-double velocity,coverRange;
+double velocity,coverRange,sightRange;
+int scanPerFrame;
 void simulate(){
     location = cortexWorld.meshmap_.location_.row(0);
     delta = next_waypoint - location;
@@ -48,6 +49,7 @@ void simulate(){
     cortexWorld.meshmap_.location_.row(0) += delta;
 }
 void planning(){
+    /*
     std::cout<<"\n****************************************\n";
     std::cout<<"next_waypoint: \n"<<next_waypoint<<std::endl;
     std::cout<<"location: \n"<<location<<std::endl;
@@ -59,11 +61,13 @@ void planning(){
     std::cout<<"wfvj_: "<<cortexWorld.wfvj_<<"\n";
     std::cout<<"loop[i][j]: "<<cortexWorld.meshmap_.bdloops_[cortexWorld.wfloopi_][cortexWorld.wfvj_]<<"\n";
     std::cout<<"****************************************\n";
-
+*/
     next_waypoint = cortexWorld.get_next_waypoint();
 }
 void scanning(){
     cortexWorld.meshmap_.scan();
+    std::cout<<"scan num: "<<cortexWorld.meshmap_.scanPoints_.size()<<"\n";
+    std::cout<<"last scan: "<<cortexWorld.meshmap_.scanPoints_.back()<<"\n";
 }
 void rosRunLoop(){
     //Initializes ROS, and sets up a node
@@ -101,6 +105,8 @@ void cortexWorldInit(){
         std::stringstream(initLocation) >> x >> y >> z;
         ros::param::get("velocity", velocity);
         ros::param::get("coverRange",coverRange);
+        ros::param::get("sightRange",sightRange);
+        ros::param::get("scanPerFrame",scanPerFrame);
 
         ros::param::get("bndDThreshold", bndDThreshold);
         ros::param::get("normDThreshold", normDThreshold);
@@ -111,7 +117,7 @@ void cortexWorldInit(){
 
         location = Eigen::Vector3d(x,y,z);
         next_waypoint = Eigen::Vector3d(x,y,z);
-        meshmap = CortexMeshmap(meshPath, Eigen::Vector3d(x,y,z), velocity, coverRange);
+        meshmap = CortexMeshmap(meshPath, Eigen::Vector3d(x,y,z), velocity, coverRange, sightRange, scanPerFrame);
         cortexWorld = CortexWorld(meshmap, bndDThreshold, normDThreshold);
     }
 
@@ -119,6 +125,11 @@ void cortexWorldInit(){
     textures.push_back(baseTexture);
     ros::param::get("colorScheme", colorScheme);
     cortexWorldViewer = Viewer(&cortexWorld, textures, colorScheme);
+
+    ros::param::get("simulateFreq", simulateFreq);
+    ros::param::get("planningFreq", planningFreq);
+    ros::param::get("scanningFreq", scanningFreq);
+    
 }
 void viewerThread(){
     cortexWorldViewer.launch();
@@ -148,12 +159,12 @@ int main( int argc, char** argv )
     int counter = 0;
     while(ros::ok()){
         ros::spinOnce();
-        //if(counter%planning_rate==0){
-        //    ROS_INFO("planning loop #%d",counter/planning_rate);
-        //    planning();
-        //}
-        if(counter%scan_rate==0){
-            ROS_INFO("planning loop #%d",counter/scan_rate);
+        if(counter%planning_rate==0){
+            ROS_INFO("planning loop #%d",counter/planning_rate);
+            planning();
+        }
+        if(counter%scanning_rate==0){
+            ROS_INFO("scanning loop #%d",counter/scanning_rate);
             scanning();
         }
         counter++;

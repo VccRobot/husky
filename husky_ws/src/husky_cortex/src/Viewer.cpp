@@ -8,10 +8,10 @@ using namespace husky_cortex;
 //bool husky_cortex::Viewer::pre_draw(){
 CortexWorld *cworld;
 Eigen::MatrixXd bdP1(3,3),bdP2(3,3);
-Eigen::MatrixXd crits;
+Eigen::MatrixXd crits, scans;
 int viewerColorScheme=0;
 Eigen::Matrix<double,1,3> intersection;
-int lastSeenIndex=0;
+int lastSeenIndex=0, lastScanIndex=0;
 
 bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     using namespace Eigen;
@@ -35,14 +35,22 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     // add criticle points visualization
     std::vector<int> seenCrits;
 //    for(int i=0;i<meshmap.criticalPoints_.size();i++)
-    int newSeenNum = meshmap.criticalPoints_.size() - lastSeenIndex;
-    if( newSeenNum >0){
-        crits.resize( newSeenNum,3);
-        for(int i=0;i<newSeenNum;i++){
-            crits.row(i) = meshmap.V_.row(meshmap.criticalPoints_[lastSeenIndex+i]);
+    int critsNum = meshmap.criticalPoints_.size();
+    if( critsNum >0){
+        crits.resize( critsNum,3);
+        for(int i=0;i<critsNum;i++){
+            crits.row(i) = meshmap.V_.row(meshmap.criticalPoints_[i]);
         }
-        lastSeenIndex = meshmap.criticalPoints_.size();
         viewer.data().add_points(crits, RowVector3d(0,1.,.0));
+    }
+
+    int scansNum = meshmap.scanPoints_.size();
+    if( scansNum >0){
+        scans.resize( scansNum,3);
+        for(int i=0;i<scansNum;i++){
+            scans.row(i) = meshmap.scanPoints_[i];
+        }
+        viewer.data().add_points(scans, RowVector3d(0.,0.,1.));
     }
 
     // add boundary edges visualization
