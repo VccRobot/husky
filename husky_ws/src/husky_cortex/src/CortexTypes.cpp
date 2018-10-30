@@ -183,7 +183,7 @@ void CortexMeshmap::scan(){
         double dirx = std::cos(theta), diry = std::sin(theta);
         Eigen::Vector3d s = location_.row(0), d(dirx,0.,diry);
         bool is_intersect = rayBoundaryIntersect(s, s+d, wfloopi, wfvj, t);
-        if(is_intersect){
+        if(is_intersect && t < sightRange_){
             scanPoints_.push_back(s + d*t);
         }
     }

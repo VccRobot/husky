@@ -9,7 +9,7 @@
     <param name="initLocation" value="-353. 0.0 0." />
     <param name="velocity" value="10." />
     <param name="coverRange" value="20." />
-    <param name="sightRange" value="20." />
+    <param name="sightRange" value="150." />
     <param name="scanPerFrame" value="10" />
     <param name="colorScheme" value="3"/>
 
