@@ -75,6 +75,29 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer){
     return false;
 }
 
+bool key_down(igl::opengl::glfw::Viewer& viewer, unsigned char key, int modifer){
+    Eigen::Vector3d dir(0.,0.,0.);
+    std::cout<<"Key: "<<key<<" "<<(unsigned int)key<<std::endl;
+    unsigned char UP_KEY(9),DOWN_KEY(8),LEFT_KEY(7),RIGHT_KEY(6),PAGEUP_KEY(10),PAGEDOWN_KEY(11);
+    if(key==UP_KEY){
+        dir = Eigen::Vector3d(0.,0.,-1000.);
+    }else if(key==LEFT_KEY){
+        dir = Eigen::Vector3d(-1000.,0.,0.);
+    }else if(key==DOWN_KEY){
+        dir = Eigen::Vector3d(0.,0.,1000.);        
+    }else if(key==RIGHT_KEY){
+        dir = Eigen::Vector3d(1000.,0.,0.);
+    }else if(key==PAGEUP_KEY){
+        cworld->meshmap_.velocity_ *= 1.2;
+    }else if(key==PAGEDOWN_KEY){
+        cworld->meshmap_.velocity_ /= 1.2;
+    }
+
+    if(dir.norm()>1.){
+        cworld->meshmap_.nextWayPoint_ = Eigen::Vector3d(cworld->meshmap_.location_.row(0)) + dir;
+    }
+    return false;
+}
 
 igl::opengl::glfw::imgui::ImGuiMenu menu;
 husky_cortex::Viewer::Viewer(CortexWorld *cortexWorld, std::vector<std::string> textureFiles, int colorScheme)
@@ -82,12 +105,13 @@ husky_cortex::Viewer::Viewer(CortexWorld *cortexWorld, std::vector<std::string> 
     cworld = cortexWorld;
     viewer_.data().clear();
     viewer_.data().set_mesh(cortexWorld_->meshmap_.V_, cortexWorld_->meshmap_.F_);
+ 
     viewer_.data().show_lines = false;
     //viewer_.data().set_colors(C);
     //viewer_.core.trackball_angle = Eigen::Quaternionf(sqrt(2.0),0,sqrt(2.0),0);
     //viewer_.core.trackball_angle.normalize();
     viewer_.callback_pre_draw = &(pre_draw);
-    //viewer_.callback_key_down = &key_down;
+    viewer_.callback_key_down = &key_down;
     viewer_.core.is_animating = true;
     viewer_.core.animation_max_fps = 30.;
     

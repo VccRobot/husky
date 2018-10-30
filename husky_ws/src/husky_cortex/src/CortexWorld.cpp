@@ -95,5 +95,8 @@ Eigen::Vector3d CortexWorld::get_next_waypoint(){
     }
 
     wp_records.push_back(meshmap_.location_);
+
+    meshmap_.nextWayPoint_ = nxt;
+
     return nxt;
 }

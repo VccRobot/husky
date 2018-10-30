@@ -35,6 +35,7 @@ int simulateFreq=100, planningFreq=20, scanningFreq=5;
 double velocity,coverRange,sightRange;
 int scanPerFrame;
 void simulate(){
+    next_waypoint = cortexWorld.meshmap_.nextWayPoint_;
     location = cortexWorld.meshmap_.location_.row(0);
     delta = next_waypoint - location;
     //std::cout<<"next_waypoint: "<<next_waypoint<<std::endl;
@@ -62,7 +63,7 @@ void planning(){
     std::cout<<"loop[i][j]: "<<cortexWorld.meshmap_.bdloops_[cortexWorld.wfloopi_][cortexWorld.wfvj_]<<"\n";
     std::cout<<"****************************************\n";
 */
-    next_waypoint = cortexWorld.get_next_waypoint();
+    cortexWorld.get_next_waypoint();
 }
 void scanning(){
     cortexWorld.meshmap_.scan();
@@ -160,8 +161,8 @@ int main( int argc, char** argv )
     while(ros::ok()){
         ros::spinOnce();
         if(counter%planning_rate==0){
-            ROS_INFO("planning loop #%d",counter/planning_rate);
-            planning();
+            //ROS_INFO("planning loop #%d",counter/planning_rate);
+            //planning();
         }
         if(counter%scanning_rate==0){
             ROS_INFO("scanning loop #%d",counter/scanning_rate);

@@ -53,6 +53,9 @@ class CortexMeshmap: public CortexTypes{
     int scanPerFrame_;
     std::vector<Eigen::Vector3d> scanPoints_;
 
+    // next points
+    Eigen::Vector3d nextWayPoint_;
+
     public:
     virtual void InitSerialization(){
         this->Add(location_, "location_");
@@ -69,8 +72,9 @@ class CortexMeshmap: public CortexTypes{
         this->Add(vbdP1, "vbdP1");
         this->Add(vbdP2, "vbdP2");
         this->Add(criticalPoints_, "criticalPoints_");
-        this->Add(scanPoints_, "scanPoints_");
         this->Add(V_uv_, "V_uv_");
+        this->Add(scanPoints_, "scanPoints_");
+        this->Add(nextWayPoint_, "nextWayPoint_");
     }
     CortexMeshmap(){}
     CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange, double sightRange, double scanPerFrame=0.);

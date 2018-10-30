@@ -19,6 +19,7 @@ CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, dou
     igl::adjacency_list(F_, graph_);
     int vn = V_.rows();
     location_.row(0) = location;
+    nextWayPoint_ = location;
     vstat_= Eigen::VectorXi::Constant(vn,0);
     vtype_= Eigen::VectorXi::Constant(vn,0);
     reebi_= Eigen::VectorXi::Constant(vn,0);
@@ -181,7 +182,9 @@ void CortexMeshmap::scan(){
         double theta = (1.+dirs(0,i))*igl::PI, t;
         double dirx = std::cos(theta), diry = std::sin(theta);
         Eigen::Vector3d s = location_.row(0), d(dirx,0.,diry);
-        rayBoundaryIntersect(s, s+d, wfloopi, wfvj, t);
-        scanPoints_.push_back(s + d*t);
+        bool is_intersect = rayBoundaryIntersect(s, s+d, wfloopi, wfvj, t);
+        if(is_intersect){
+            scanPoints_.push_back(s + d*t);
+        }
     }
 }
