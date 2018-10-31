@@ -14,7 +14,8 @@ using namespace husky_cortex;
 
 CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, double velocity, double coverRange, double sightRange, double scanPerFrame)
 :velocity_(velocity),coverRange_(coverRange),sightRange_(sightRange),scanPerFrame_(scanPerFrame){
-    igl::readOBJ(meshpath, V_, F_);
+    Eigen::MatrixXd CN, TC; Eigen::MatrixXi FTC,FN;
+    igl::readOBJ(meshpath, V_, TC, CN, F_, FTC, FN);
 
     igl::adjacency_list(F_, graph_);
     int vn = V_.rows();
@@ -27,6 +28,10 @@ CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, dou
 
     // get boundaries and critical points
     igl::boundary_loop(F_, bdloops_);
+    for(int j=0;j<bdloops_[0].size();j+=20){
+        std::cout<<"Loop 1's "<<j<<"th vertex's TC: \n"<<V_uv_.row(bdloops_[0][j])<<"\n\n";
+
+    }
     for(int i=0;i<bdloops_.size();i++){
         for(int j=0;j<bdloops_[i].size();j++){
             vtype_(bdloops_[i][j])=1;
@@ -44,17 +49,27 @@ CortexMeshmap::CortexMeshmap(std::string meshpath, Eigen::Vector3d location, dou
             vbdP2.push_back(pnt2);
         }
     }
-
-
-    // compute UV coordinates(parametrization)
-      // Map the boundary to a circle, preserving edge proportions
-    Eigen::MatrixXd bnd_uv;
-    Eigen::VectorXi bnd; // compue bnd loops again, this time save as Eigen Vector
-    igl::boundary_loop(F_, bnd);
-    igl::map_vertices_to_circle(V_, bnd, bnd_uv);
-    // Harmonic parametrization for the internal vertices
-    igl::harmonic(V_,F_,bnd,bnd_uv,1,V_uv_);
-    //V_uv_*=10.;
+    // get the UV coordinates(parametrization)
+    if(TC.rows() == V_.rows()){
+        std::cout<<"Mesh UV is given, use it directly\n";
+        V_uv_.resize(V_.rows(),2);
+        for(int i=0;i<F_.rows();i++){
+            for(int j=0;j<3;j++){
+                V_uv_.row( F_(i,j) ) = TC.row(FTC(i,j));
+            }
+        }
+    }else{
+        std::cout<<"Mesh UV is not given, compute it using harmonic parametrization\n";
+        //parametrize the mesh if no UV is given
+        // Map the boundary to a circle, preserving edge proportions
+        Eigen::MatrixXd bnd_uv;
+        Eigen::VectorXi bnd; // compue bnd loops again, this time save as Eigen Vector
+        igl::boundary_loop(F_, bnd);
+        igl::map_vertices_to_circle(V_, bnd, bnd_uv);
+        // Harmonic parametrization for the internal vertices
+        igl::harmonic(V_,F_,bnd,bnd_uv,1,V_uv_);
+        //V_uv_*=10.;
+    }
 
     updateMesh();
 }

@@ -16,7 +16,7 @@
     <param name="normDThreshold" value="30."/>
     <param name="bndDThreshold" value="5."/>
 
-    <param name="baseTexture" value="$(find husky_cortex)/data/paper.png"/>
+    <param name="baseTexture" value="$(find husky_cortex)/data/checker.png"/>
 
 
     <param name="simulateFreq" value="100"/>
